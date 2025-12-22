@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "ProfileSchemaV1",
+  "type": "object",
+  "properties": {
+    "name": { "type": "string" },
+    "ageRange": { "type": "string", "enum": ["18-24", "25-34", "35-44", "45-54", "55+"] },
+    "location": { "type": "string" },
+    "intent": { "type": "string" },
+    "dealbreakers": { "type": "array", "items": { "type": "string" } },
+    "preferences": { "type": "array", "items": { "type": "string" } }
+  },
+  "required": [],
+  "additionalProperties": false
+}
