@@ -18,5 +18,5 @@ if (process.env.NODE_ENV !== "production") {
   globalForPrisma.prisma = prisma;
 }
 
-export { ChatRole };
-export type { RelationshipContextType, TonePreference };
+export { ChatRole, TonePreference };
+export type { RelationshipContextType };

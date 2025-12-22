@@ -6,10 +6,7 @@ import {
   prisma,
 } from "@/lib/prisma";
 import {
-  computeCompleteness,
   getOrCreateProfile,
-  mergeProfile,
-  sanitizePatch,
   toDto,
 } from "@/lib/profile";
 

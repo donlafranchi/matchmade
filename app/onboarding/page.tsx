@@ -1,147 +1,230 @@
-import { redirect } from "next/navigation";
-import { requireSessionUser } from "@/lib/auth";
-import {
-  RelationshipContextType,
-  TonePreference,
-  prisma,
-} from "@/lib/prisma";
+"use client";
 
-const contextOptions: { value: RelationshipContextType; label: string }[] = [
-  { value: "romantic", label: "Romantic" },
-  { value: "friendship", label: "Friendship" },
-  { value: "professional", label: "Professional" },
-  { value: "creative", label: "Creative" },
-  { value: "service", label: "Service" },
-];
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
-const toneOptions: { value: TonePreference; label: string; helper: string }[] =
-  [
-    { value: "light", label: "Light", helper: "Cruisey, gentle, low-pressure" },
-    {
-      value: "balanced",
-      label: "Balanced",
-      helper: "A mix of playful and direct",
-    },
-    { value: "serious", label: "Serious", helper: "Direct, to the point" },
-  ];
+type MessageType = {
+  id: number;
+  text: string;
+  isAgent: boolean;
+};
 
-async function saveSelections(formData: FormData) {
-  "use server";
-  const user = await requireSessionUser();
+type ContextOption = "romantic" | "friendship" | "professional";
 
-  const selectedContexts = contextOptions
-    .map((ctx) => ctx.value)
-    .filter((ctx) => formData.get(`context-${ctx}`) === "on");
-
-  if (selectedContexts.length === 0) {
-    return;
-  }
-
-  const tone =
-    (formData.get("tone") as TonePreference | null) || TonePreference.light;
-
-  await prisma.$transaction(
-    selectedContexts.map((contextType) =>
-      prisma.contextProfile.upsert({
-        where: {
-          userId_contextType: {
-            userId: user.id,
-            contextType,
-          },
-        },
-        update: { tonePreference: tone },
-        create: { userId: user.id, contextType, tonePreference: tone },
-      }),
-    ),
+export default function OnboardingPage() {
+  const router = useRouter();
+  const [messages, setMessages] = useState<MessageType[]>([]);
+  const [showChoices, setShowChoices] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [selectedContexts, setSelectedContexts] = useState<Set<ContextOption>>(
+    new Set()
   );
 
-  const destination = selectedContexts[0];
-  redirect(`/contexts/${destination}`);
-}
+  useEffect(() => {
+    // Show messages sequentially with natural delays
+    const timers: NodeJS.Timeout[] = [];
 
-export default async function OnboardingPage() {
-  const user = await requireSessionUser();
-  const existing = await prisma.contextProfile.findMany({
-    where: { userId: user.id },
-  });
+    timers.push(
+      setTimeout(() => {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: 1,
+            text: "Hey, I'm here to help you meet the right people—whether that's finding new friends, meeting someone you could fall for, or networking personally or professionally.",
+            isAgent: true,
+          },
+        ]);
+      }, 500)
+    );
 
-  const existingSet = new Set(existing.map((c) => c.contextType));
+    timers.push(
+      setTimeout(() => {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: 2,
+            text: "Here's how this works: we focus on what matters to you first (values, lifestyle, what you're actually looking for), then attraction, then we help you meet in real life. No endless swiping. No games. Just honest connections.",
+            isAgent: true,
+          },
+        ]);
+      }, 2500)
+    );
+
+    timers.push(
+      setTimeout(() => {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: 3,
+            text: "So what brings you here? What are you hoping to find right now?",
+            isAgent: true,
+          },
+        ]);
+        setShowChoices(true);
+      }, 5000)
+    );
+
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  const toggleContext = (context: ContextOption) => {
+    setSelectedContexts((prev) => {
+      const newSet = new Set(prev);
+      if (newSet.has(context)) {
+        newSet.delete(context);
+      } else {
+        newSet.add(context);
+      }
+      return newSet;
+    });
+  };
+
+  const handleSubmit = async () => {
+    if (selectedContexts.size === 0) return;
+
+    setShowChoices(false);
+    setIsProcessing(true);
+
+    const contextArray = Array.from(selectedContexts);
+    const choiceText =
+      contextArray.length === 1
+        ? contextArray[0] === "romantic"
+          ? "Looking for romance"
+          : contextArray[0] === "friendship"
+            ? "Looking for friends"
+            : "Professional networking"
+        : `Looking for ${contextArray.length} things`;
+
+    // Add user's choice to messages
+    setMessages((prev) => [
+      ...prev,
+      {
+        id: Date.now(),
+        text: choiceText,
+        isAgent: false,
+      },
+    ]);
+
+    // Create context profiles
+    try {
+      const response = await fetch("/api/onboarding", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contexts: contextArray }),
+      });
+
+      if (response.ok) {
+        // Show confirmation message
+        setTimeout(() => {
+          setMessages((prev) => [
+            ...prev,
+            {
+              id: Date.now() + 1,
+              text: "Cool. Let's get started.",
+              isAgent: true,
+            },
+          ]);
+
+          // Redirect to first context
+          setTimeout(() => {
+            router.push(`/contexts/${contextArray[0]}`);
+          }, 1500);
+        }, 800);
+      }
+    } catch (error) {
+      console.error("Error creating contexts:", error);
+      setIsProcessing(false);
+      setShowChoices(true);
+    }
+  };
+
+  const contextOptions: { value: ContextOption; label: string }[] = [
+    { value: "friendship", label: "Looking for friends" },
+    { value: "romantic", label: "Looking for romance" },
+    { value: "professional", label: "Professional networking" },
+  ];
 
   return (
-    <div className="flex min-h-screen justify-center bg-zinc-50 px-6 py-12 text-zinc-900">
-      <main className="w-full max-w-3xl space-y-8 rounded-2xl bg-white p-10 shadow-sm">
-        <div className="space-y-2">
+    <div className="flex min-h-screen justify-center bg-zinc-50 px-6 py-12">
+      <main className="w-full max-w-2xl space-y-6">
+        {/* Header */}
+        <div className="text-center">
           <p className="text-sm uppercase tracking-[0.2em] text-zinc-500">
-            Choose your tracks
-          </p>
-          <h1 className="text-3xl font-semibold leading-tight">
-            Where should we start?
-          </h1>
-          <p className="text-zinc-600">
-            Select the kinds of relationships you want help with. Each one gets
-            its own track and tone. No blending.
+            Welcome
           </p>
         </div>
 
-        <form action={saveSelections} className="space-y-6">
-          <div className="space-y-3">
-            <p className="text-sm font-medium text-zinc-800">Relationship tracks</p>
-            <div className="grid gap-3 sm:grid-cols-2">
-              {contextOptions.map((ctx) => (
-                <label
-                  key={ctx.value}
-                  className="flex items-start gap-3 rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-sm transition hover:border-zinc-400"
-                >
-                  <input
-                    type="checkbox"
-                    name={`context-${ctx.value}`}
-                    defaultChecked={existingSet.has(ctx.value)}
-                    className="mt-1 h-4 w-4 rounded border-zinc-300 text-black focus:ring-0"
-                  />
-                  <div>
-                    <div className="font-medium">{ctx.label}</div>
-                    <p className="text-sm text-zinc-600">
-                      Kept separate. No cross-mode nudging.
-                    </p>
-                  </div>
-                </label>
-              ))}
+        {/* Chat container */}
+        <div className="space-y-4 rounded-2xl bg-white p-8 shadow-sm">
+          {messages.map((message) => (
+            <div
+              key={message.id}
+              className={`flex ${message.isAgent ? "justify-start" : "justify-end"}`}
+            >
+              <div
+                className={`max-w-[85%] rounded-2xl px-5 py-3 ${
+                  message.isAgent
+                    ? "bg-zinc-100 text-zinc-900"
+                    : "bg-black text-white"
+                }`}
+              >
+                <p className="text-[15px] leading-relaxed">{message.text}</p>
+              </div>
             </div>
-          </div>
+          ))}
 
-          <div className="space-y-3">
-            <p className="text-sm font-medium text-zinc-800">
-              Tone preference
-            </p>
-            <div className="grid gap-3 sm:grid-cols-3">
-              {toneOptions.map((tone) => (
-                <label
-                  key={tone.value}
-                  className="flex cursor-pointer flex-col gap-1 rounded-xl border border-zinc-200 bg-white px-4 py-3 shadow-sm transition hover:border-zinc-400"
-                >
-                  <div className="flex items-center gap-2">
+          {/* Choice checkboxes */}
+          {showChoices && !isProcessing && (
+            <div className="space-y-4 pt-4">
+              <div className="space-y-3">
+                {contextOptions.map((option) => (
+                  <label
+                    key={option.value}
+                    className={`flex items-center gap-3 rounded-xl border-2 px-5 py-4 cursor-pointer transition ${
+                      selectedContexts.has(option.value)
+                        ? "border-black bg-zinc-50"
+                        : "border-zinc-200 bg-white hover:border-zinc-400"
+                    }`}
+                  >
                     <input
-                      type="radio"
-                      name="tone"
-                      value={tone.value}
-                      defaultChecked={tone.value === TonePreference.light}
-                      className="h-4 w-4 border-zinc-300 text-black focus:ring-0"
+                      type="checkbox"
+                      checked={selectedContexts.has(option.value)}
+                      onChange={() => toggleContext(option.value)}
+                      className="h-5 w-5 rounded border-zinc-300 text-black focus:ring-0 focus:ring-offset-0"
                     />
-                    <div className="font-medium">{tone.label}</div>
-                  </div>
-                  <p className="text-sm text-zinc-600">{tone.helper}</p>
-                </label>
-              ))}
-            </div>
-          </div>
+                    <span className="text-[15px]">{option.label}</span>
+                  </label>
+                ))}
+              </div>
 
-          <button
-            type="submit"
-            className="w-full rounded-lg bg-black px-4 py-3 text-white transition hover:bg-zinc-800"
-          >
-            Continue
-          </button>
-        </form>
+              {selectedContexts.size > 0 && (
+                <button
+                  onClick={handleSubmit}
+                  className="w-full rounded-xl bg-black px-5 py-4 text-[15px] text-white transition hover:bg-zinc-800"
+                >
+                  Continue
+                </button>
+              )}
+            </div>
+          )}
+
+          {isProcessing && (
+            <div className="flex justify-start pt-4">
+              <div className="rounded-2xl bg-zinc-100 px-5 py-3">
+                <div className="flex space-x-2">
+                  <div className="h-2 w-2 animate-bounce rounded-full bg-zinc-400 [animation-delay:-0.3s]"></div>
+                  <div className="h-2 w-2 animate-bounce rounded-full bg-zinc-400 [animation-delay:-0.15s]"></div>
+                  <div className="h-2 w-2 animate-bounce rounded-full bg-zinc-400"></div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Subtle footer */}
+        <p className="text-center text-sm text-zinc-500">
+          One step at a time. Keep it real.
+        </p>
       </main>
     </div>
   );

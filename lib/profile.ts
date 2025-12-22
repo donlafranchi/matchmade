@@ -1,7 +1,4 @@
-import {
-  Prisma,
-  RelationshipContextType,
-} from "@/app/generated/prisma";
+import { Prisma } from "@/app/generated/prisma/client";
 import { prisma } from "./prisma";
 
 export type ProfileDto = {
@@ -39,7 +36,7 @@ export function sanitizePatch(patch: Record<string, unknown>): ProfileDto {
     if (typeof value === "string") {
       const trimmed = value.trim();
       if (trimmed) {
-        result[key] = trimmed as any;
+        (result as Record<string, unknown>)[key] = trimmed;
       }
     }
   }
@@ -94,7 +91,7 @@ export async function getOrCreateProfile(contextProfileId: string) {
   });
 }
 
-export function toDto(profile: Prisma.ProfileGetPayload<{}>): {
+export function toDto(profile: Prisma.ProfileGetPayload<object>): {
   profile: ProfileDto | null;
   completeness: number;
   missing: string[];

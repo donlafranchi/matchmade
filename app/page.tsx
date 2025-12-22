@@ -17,7 +17,7 @@ async function login(formData: FormData) {
     create: { email, name: name || undefined },
   });
 
-  setSessionCookie(user.id);
+  await setSessionCookie(user.id);
   redirect("/onboarding");
 }
 
