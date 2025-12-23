@@ -6,7 +6,8 @@
       "Bash(mv:*)",
       "Bash(cp:*)",
       "Bash(mkdir:*)",
-      "Bash(npm run lint:*)"
+      "Bash(npm run lint:*)",
+      "Bash(git check-ignore:*)"
     ]
   }
 }
