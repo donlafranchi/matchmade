@@ -71,9 +71,10 @@ Feature Planner → Architect → [Backend + Frontend + Agent-Logic (parallel)] 
 **Activate Role:** `dev/roles/feature-planner.md`
 
 **Prerequisites:**
+- **Read `dev/project-state.md`** (ALWAYS START HERE - current state, what's next)
 - Read `.context/llm-dev-context.md` (build order)
 - Read relevant brief from `.context/briefs/[step].md`
-- Read latest session logs to understand current state
+- Read latest session logs (if needed for deeper context)
 - Check existing tickets in `dev/tickets/`
 - Check existing slices in `dev/slices/`
 
@@ -130,6 +131,7 @@ Create ticket: `dev/tickets/slice-[N]-[feature-name].md`
 **Activate Role:** `dev/roles/architect.md` (swarm mode)
 
 **Prerequisites:**
+- Read `dev/project-state.md` (current state)
 - Read `dev/tickets/slice-[N]-[feature-name].md`
 - Read `.context/llm-dev-context.md` (product constraints)
 - Read `.context/values-schema.md` (data model)
@@ -416,10 +418,56 @@ Log in `dev/swarms/slice-[N]-[date].md` (QA section)
 
 ---
 
+## Update Project State & Handoff
+
+**After QA completes, update `dev/project-state.md`:**
+
+1. **Mark slice complete in "Active Work":**
+   - Clear all role owners
+   - Mark status as complete
+
+2. **Add handoff entry in "Recent Handoffs":**
+   ```markdown
+   ### YYYY-MM-DD: Slice [N] - [Feature Name] Complete
+   - **From:** QA (swarm complete)
+   - **To:** [Next Role/Agent or "Ready for next feature"]
+   - **Artifacts:**
+     - `dev/tickets/slice-[N]-[feature-name].md`
+     - `dev/slices/slice-[N]-[feature-name]/architecture.md`
+     - `dev/swarms/slice-[N]-[date].md`
+     - `.context/session-logs/slice-[N]-[date].md`
+     - Code files: [list key files]
+   - **Status:** ✅ Complete
+   - **Next:** [Specific next step]
+   ```
+
+3. **Update "Next Up" section:**
+   - What feature/slice is next?
+   - Feature Planner to plan next work
+
+4. **Update "Build Order Progress":**
+   - Check off completed brief
+   - Update percentage complete
+
+5. **Create session log:**
+   - `.context/session-logs/slice-[N]-[feature-name]-[date].md`
+   - High-level summary of slice work
+   - Link to swarm log and artifacts
+
+---
+
 ## Progress Tracking
 
 ### Before Starting Swarm Session:
-1. Read latest 5 session logs from `.context/session-logs/`
+**ALWAYS read `dev/project-state.md` first to understand:**
+- Current phase and build order progress
+- Active work (who's working on what)
+- Recent completions (what just finished)
+- Next up (what's ready to build)
+- Blockers and dependencies
+
+**Then check supporting context:**
+1. Read latest 5 session logs from `.context/session-logs/` (if needed)
 2. Check all tickets in `dev/tickets/` (what's planned)
 3. Check all slices in `dev/slices/` (what's in progress)
 4. Summarize current state

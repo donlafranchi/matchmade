@@ -46,7 +46,7 @@ This directory contains all role definitions for both single-dev and swarm devel
 ```
 User wants to add: "Gamification with points and badges"
 → Product Manager evaluates
-→ Decision: ❌ NOT APPROVED (conflicts with calm UX, no engagement optimization)
+→ Decision: ❌ NOT APPROVED (conflicts with "interface gets out of the way", no engagement optimization)
 ```
 
 ---
@@ -170,7 +170,7 @@ Slice: "Matching Engine"
 - Implements state management
 - Connects to API endpoints
 - Writes component tests
-- Follows UX principles (calm, honest, values-first)
+- Follows UX principles (easy, natural, gets out of the way)
 
 **Can work in parallel with:** Backend, Agent-Logic
 
@@ -197,7 +197,7 @@ Slice: "Matching Engine"
 - Implements matching/scoring algorithms
 - Implements conversational flows
 - Stores prompts in `playbooks/` directory
-- References `.context/values-schema.md` and `.context/vibes.md`
+- References `.context/values-schema.md` and `.context/the-art-of-vibes.md`
 
 **Can work in parallel with:** Backend, Frontend
 
@@ -230,7 +230,7 @@ Slice: "Profile Extraction"
 - Reviews acceptance criteria from ticket
 - Runs all automated tests
 - Performs manual testing
-- Validates product principles (honest UX, calm tone)
+- Validates product principles (interface gets out of the way, real and honest)
 - Checks for security issues
 - Creates validation report
 
@@ -243,7 +243,7 @@ Profile Preview feature is implemented
   - Checks: Missing fields shown ✓
   - Checks: CTA opens chat ✓
   - Runs tests: 15/15 passing ✓
-  - Validates: Calm UI, honest messaging ✓
+  - Validates: Interface gets out of the way, real and honest ✓
   - Verdict: ✅ APPROVED
 ```
 

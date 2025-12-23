@@ -3,7 +3,7 @@
 ## Project Overview
 **Matchmade** - Values-first relationship builder (romantic + friendship)
 - Stack: Next.js + TypeScript + Tailwind + Postgres + Prisma
-- Approach: Calm, honest UX; no overpromising chemistry
+- Approach: Easy, natural interface; gets out of your way; gets people meeting in real life where chemistry happens
 - Development: Stateless, role-based, preserves session logs
 
 ---
@@ -13,7 +13,7 @@
 ### Product Knowledge
 - `.context/llm-dev-context.md` - Product essence, non-negotiables, stack
 - `.context/northstar.md` - Product vision
-- `.context/vibes.md` - Chemistry/attraction philosophy
+- `.context/the-art-of-vibes.md` - Chemistry/attraction philosophy
 - `.context/values-schema.md` - Matching approach
 
 ### Feature Briefs (Build Order)
@@ -102,7 +102,7 @@ Load:
 - dev/roles/product-manager.md
 - .context/llm-dev-context.md (product essence, non-negotiables)
 - .context/northstar.md
-- .context/vibes.md
+- .context/the-art-of-vibes.md
 - .context/values-schema.md
 - Latest 3 session logs from .context/session-logs/
 
@@ -264,7 +264,7 @@ Activate FRONTEND role (swarm).
 Load:
 - dev/roles/frontend.md
 - dev/slices/[slice-name]/architecture.md (the contract)
-- .context/llm-dev-context.md (for UX principles: calm, honest, values-first)
+- .context/llm-dev-context.md (for UX principles: easy, natural, gets out of the way)
 
 Context: Implement UI for [slice name]
 
@@ -299,7 +299,7 @@ Tasks:
 1. Review acceptance criteria
 2. Run all tests
 3. Manual testing checklist
-4. Validate against product principles (honest UX, no overpromising)
+4. Validate against product principles (interface gets out of the way, real and honest)
 5. Create validation report
 6. Log in dev/logs/ or dev/swarms/
 
@@ -368,7 +368,7 @@ Activate AGENT-LOGIC role (swarm).
 Load:
 - dev/roles/agent-logic.md
 - .context/values-schema.md
-- .context/vibes.md (chemistry philosophy)
+- .context/the-art-of-vibes.md (chemistry philosophy)
 - playbooks/profile-schema.json
 - dev/slices/[slice-name]/architecture.md
 
@@ -616,7 +616,8 @@ Activate Debug role
 
 4. **Product Alignment**
    - Always validate against product principles
-   - Honest, calm, values-first UX
+   - Easy, natural interface that gets out of the way
+   - Real and honest; gets people meeting IRL where chemistry happens
    - No overpromising chemistry
 
 5. **Budget Discipline** (Swarm mode)

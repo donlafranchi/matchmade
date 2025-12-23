@@ -157,7 +157,7 @@ Format:
 - Include error cases
 - Cover data persistence
 - Verify integration points
-- Include UX/product principles (calm UI, honest messaging)
+- Include UX/product principles (interface gets out of the way, real and honest)
 
 ### Step 6: Assess Scope (Single-Dev vs Swarm)
 
@@ -208,8 +208,9 @@ Format:
 - [ ] Error handling: [steps to test]
 
 ### Product Validation
-- [ ] UX is calm (whitespace, quiet tone)
-- [ ] Messaging is honest (no overpromising)
+- [ ] Interface gets out of the way (uncluttered, one clear action)
+- [ ] Messaging is real and honest (no overpromising)
+- [ ] Moves people toward real meetings (where chemistry happens)
 - [ ] Follows [specific product principle]
 ```
 
@@ -242,7 +243,8 @@ As a [user type], I want to [action] so that [benefit/outcome].
 - [ ] Criterion 2
 - [ ] Criterion 3
 - [ ] Criterion 4
-- [ ] UX follows calm, honest principles
+- [ ] Interface feels easy and natural
+- [ ] Messaging is real and honest
 - [ ] No security vulnerabilities (XSS, injection, etc.)
 
 ## Dependencies
@@ -415,7 +417,7 @@ No blockers.
 - User can view derived profile preview
 - Shows completeness score and missing fields
 - CTA to improve profile opens chat with targeted question
-- Calm UI, honest messaging about profile state
+- Interface stays out of the way, messaging is real and honest
 
 **Status:** Ready for Architect
 
@@ -543,10 +545,10 @@ No blockers.
 - ≤ 1 table (Match table)
 
 ### Slice 7b Summary:
-- Match reveal UI (calm, not fireworks)
-- Quick plan CTA for coordination
-- Minimal chat interface
-- Honest "No matches" state
+- Match reveal UI (gets out of the way, no fireworks)
+- Quick plan CTA to coordinate meeting
+- Skip-the-pen-pal interface
+- Real "No matches yet" state
 
 **Budget:**
 - ≤ 400 LOC
