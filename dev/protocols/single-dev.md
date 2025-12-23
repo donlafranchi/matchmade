@@ -31,15 +31,16 @@ Read Context → Plan → Design → Implement → Test → Review → Log → C
 ### 1. Load Context
 
 **Read First (Every Session):**
+- **`dev/project-state.md`** - ALWAYS START HERE (single source of truth for current state)
 - `.context/llm-dev-context.md` - Product essence and constraints
 - `.context/values-schema.md` - Data model and matching philosophy
-- `.context/session-log-template.md` - Logging format
 - Relevant brief from `.context/briefs/[step].md`
-- Latest 3-5 session logs from `.context/session-logs/` (to understand current state)
+- Latest 3-5 session logs from `.context/session-logs/` (if needed for deeper context)
 
 **Check Current State:**
-- Review recent logs to see what's been built
-- Check `dev/tickets/` for planned work
+- Read "Active Work" section in project-state.md
+- Read "Next Up" section to see what's ready to build
+- Check for any blockers or dependencies
 - Identify where you are in the build order
 
 ### 2. Define the Task
@@ -198,7 +199,58 @@ Use template from `.context/session-log-template.md`:
 **Also Create/Update:**
 - `dev/logs/[feature-name]-[date].md` with detailed implementation notes
 
-### 8. Commit (Version Control)
+### 8. Update Project State & Handoff
+
+**Update `dev/project-state.md`:**
+
+1. **Mark task complete in "Active Work":**
+   - Clear the owner
+   - Mark status as complete
+
+2. **Add handoff entry in "Recent Handoffs":**
+   ```markdown
+   ### YYYY-MM-DD: [Feature Name] Complete
+   - **From:** [Your Role]
+   - **To:** [Next Role/Agent or "Ready for next feature"]
+   - **Artifacts:**
+     - `.context/session-logs/[feature]-[date].md`
+     - `dev/logs/[feature]-implementation-[date].md`
+     - Code files: [list key files]
+   - **Status:** ✅ Complete
+   - **Next:** [Specific next step]
+   ```
+
+3. **Update "Next Up" section:**
+   - What feature is ready to build next?
+   - Who should work on it?
+   - What do they need to read?
+
+4. **Update "Build Order Progress":**
+   - Check off completed brief
+   - Update percentage complete
+
+**Example Update:**
+```markdown
+## Active Work
+### Current Task
+- **Owner:** None (ready for next session)
+- **Task:** Determine next feature
+- **Blocked by:** None
+
+## Recent Handoffs
+### 2025-12-22: Profile Preview Complete
+- **From:** Implement (single-dev)
+- **To:** Feature Planner (for next feature)
+- **Artifacts:**
+  - `.context/session-logs/profile-preview-2025-12-22.md`
+  - `dev/logs/profile-preview-implementation-2025-12-22.md`
+  - `web/app/profile/preview/page.tsx`
+  - `web/components/ProfilePreview.tsx`
+- **Status:** ✅ Complete
+- **Next:** Feature Planner to identify Brief 05 (Media Upload)
+```
+
+### 9. Commit (Version Control)
 
 **Branch Convention:**
 - `feat/[area]-[short-description]` for features
@@ -248,16 +300,28 @@ Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
 ## Progress Tracking
 
 ### Before Starting:
-Read recent session logs to understand:
-- What features are complete
-- What's currently in progress
-- What dependencies exist
+**ALWAYS read `dev/project-state.md` first to understand:**
+- Current phase and build order progress
+- Active work (who's working on what)
+- Recent completions (what just finished)
+- Next up (what's ready to build)
+- Blockers and dependencies
+
+**Then read supporting context:**
+- Recent session logs (if needed for deeper context)
+- Active tickets in `dev/tickets/`
+- Latest implementation logs in `dev/logs/`
 
 ### After Completing:
-1. Create session log in `.context/session-logs/`
-2. Create implementation log in `dev/logs/`
-3. Update any relevant tickets in `dev/tickets/` (mark complete)
-4. Note any follow-ups or blockers for next session
+1. **Update `dev/project-state.md`** (most important)
+   - Mark task complete
+   - Add handoff entry
+   - Update "Next Up"
+   - Update build order progress
+2. Create session log in `.context/session-logs/`
+3. Create implementation log in `dev/logs/`
+4. Update any relevant tickets in `dev/tickets/` (mark complete)
+5. Note any follow-ups or blockers in project-state.md
 
 ---
 
@@ -267,11 +331,12 @@ Read recent session logs to understand:
 
 **Step 1 - Load Context:**
 ```
-Read:
-- .context/llm-dev-context.md
-- .context/values-schema.md
-- .context/briefs/04-profile-preview.md
-- Last 3 session logs
+Read (in order):
+- dev/project-state.md (current state, what's next)
+- .context/llm-dev-context.md (product essence)
+- .context/values-schema.md (data model)
+- .context/briefs/04-profile-preview.md (feature spec)
+- Last 3 session logs (if needed for context)
 ```
 
 **Step 2 - Architect:**
@@ -320,7 +385,16 @@ Create .context/session-logs/profile-preview-2025-12-20.md
 Create dev/logs/profile-preview-implementation-2025-12-20.md
 ```
 
-**Step 7 - Commit:**
+**Step 7 - Update State:**
+```
+Update dev/project-state.md:
+- Mark task complete in "Active Work"
+- Add handoff to "Recent Handoffs"
+- Update "Next Up" (Feature Planner for Brief 05)
+- Check off Brief 04 in "Build Order Progress"
+```
+
+**Step 8 - Commit:**
 ```
 git checkout -b feat/profile-preview
 git add .
@@ -333,10 +407,10 @@ git commit -m "feat: add profile preview page..."
 
 **Start Single-Dev Session:**
 ```
-1. Load context files
-2. Check recent session logs
-3. Define task
-4. Architect → Implement → Test → Review → Log → Commit
+1. Read dev/project-state.md (ALWAYS FIRST)
+2. Load role context files
+3. Check what's next
+4. Architect → Implement → Test → Review → Log → Update State → Commit
 ```
 
 **Key Principles:**

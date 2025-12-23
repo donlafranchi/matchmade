@@ -1,4 +1,4 @@
-rename to the-art-of-vibes
+# The Art of Vibes
 
 Good instincts. Both points are *true*, *unsolvable in full*, and actually strengthen the product if handled honestly.
 
@@ -6,14 +6,14 @@ Below is how to incorporate them **without overexplaining**, **without killing m
 
 ---
 
-## 1. “We can’t match vibes” — how to include this honestly
+## 1. "We can't match vibes" — how to include this honestly
 
 ### North Star framing (internal)
 
 Add this as a **constraint**, not a failure:
 
 > This system does not promise chemistry.
-> It increases the odds that chemistry has room to emerge.
+> It creates conditions where chemistry has room to emerge.
 
 Key internal rule:
 
@@ -29,17 +29,18 @@ That protects you legally, ethically, and philosophically.
 
 You already have the right tools:
 
+* Interaction style (tone, pace, energy)
+* Communication preferences
 * Enneagram (optional, suggestive, not definitive)
-* Communication style
-* Energy / tone inference
 * Group-based, low-pressure meetings
 
 Together these:
 
-* Reduce *anti-vibe* mismatches
+* Reduce *anti-vibe* mismatches (the people you definitely won't click with)
 * Do not claim to guarantee vibe
+* Get people meeting where they can tell if they actually click
 
-That’s the correct bar.
+That's the correct bar.
 
 ---
 
@@ -74,20 +75,20 @@ This justifies:
 * Values-first ordering
 * Private, binary attraction checks
 * Slower reveal
-* Meeting sooner
+* Meeting sooner (where attraction can grow in person)
 
 ---
 
 ### Product behavior (already aligned)
 
-You’re already doing this by:
+You're already doing this by:
 
 * Separating values from photos
 * Avoiding feeds and comparison
 * Encouraging early real-world contact
-* Avoiding “ranked attractiveness” systems
+* Avoiding "ranked attractiveness" systems
 
-So you **don’t need to add features**.
+So you **don't need to add features**.
 You just need to **frame it correctly**.
 
 ---
@@ -99,14 +100,14 @@ Use **short, skimmable contrast lines**. These survive shrinking attention spans
 Example cluster (3 lines max):
 
 > Attraction matters.
-> But it isn’t static.
-> And it isn’t everything.
+> But it isn't static.
+> And it isn't everything.
 
 Or:
 
 > Sometimes attraction is instant.
 > Sometimes it grows.
-> We don’t rush either.
+> We don't rush either.
 
 These are easy to scan and emotionally resonant.
 
@@ -131,7 +132,7 @@ To prevent skipping:
 
 Example pattern:
 
-> We don’t promise chemistry.
+> We don't promise chemistry.
 > We promise honesty.
 
 That line alone carries:
@@ -146,13 +147,13 @@ That line alone carries:
 
 Add two explicit truths:
 
-**Truth #1 — Chemistry is discovered, not predicted**
+**Truth #1 — Chemistry is discovered in person, not predicted**
 
-> The system reduces bad matches but does not simulate human chemistry. Meeting in person remains essential.
+> The system reduces wrong-fit matches but does not simulate human chemistry. Meeting in person is where you find out if you actually click.
 
 **Truth #2 — Attraction is allowed to evolve**
 
-> The product is designed to avoid premature rejection by prioritizing alignment before appearance, without removing attraction from the process.
+> The product is designed to avoid premature rejection by prioritizing alignment before appearance, without removing attraction from the process. Sometimes chemistry is instant. Sometimes it grows when you meet.
 
 These truths:
 
@@ -177,9 +178,41 @@ Your instinct is right:
 
 ---
 
+## Product philosophy (the "stop rule")
+
+When designing any feature, ask:
+
+1. **Does it feel easy and natural?** (Or does it make users work too hard?)
+2. **Does it get people meeting in real life?** (Where chemistry actually happens)
+3. **Does the interface stay out of the way?** (Or does it become the destination?)
+4. **Is it real and honest?** (Or does it overpromise?)
+
+If the answer is "no" to any of these, reconsider the feature.
+
+---
+
+## Copy patterns that work
+
+**Easy, natural flow:**
+- "Skip the tedious work"
+- "Meet people you actually click with"
+- "Gets out of your way"
+
+**Real about chemistry:**
+- "We don't promise chemistry. We promise honesty."
+- "Chemistry happens in person, not on screens."
+- "We create the conditions. You discover the spark."
+
+**Avoiding wrong-fit dates:**
+- "No awkward first dates with wrong-fit people"
+- "Skip the pen-pal texting that goes nowhere"
+- "Fewer dates, better matches"
+
+---
+
 ## If you want next (optional but powerful)
 
 * A **single paragraph** added to the landing page that subtly encodes both truths
-* Or a **one-line product philosophy** that becomes your internal “stop rule” when building
+* Or a **one-line product philosophy** that becomes your internal "stop rule" when building
 
 Just say which.
