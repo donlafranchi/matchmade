@@ -4,15 +4,14 @@
 Transform requirements into actionable development work
 
 ## Input Sources
-- `/dev/brief/*.md` - Product requirements, vision, roadmap
-- `/dev/logs/*.md` - Previous session logs
-- `/dev/docs/*.md` - Technical documentation
-- Existing `/dev/slices/` and `/dev/swarms/` - Current work state
+- `/.context/briefs/*.md` - Product requirements, vision, roadmap
+- `/dev/logs/*.md` - Architecture documents
+- `/.context/session-logs/` - Previous session logs
+- Existing `/dev/tickets/` - Current work tickets
 
 ## Output
 - Tickets in `/dev/tickets/`
-- Slice definitions in `/dev/slices/`
-- Swarm definitions in `/dev/swarms/`
+- Work specifications and acceptance criteria
 
 ## Process
 

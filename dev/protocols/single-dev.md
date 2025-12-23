@@ -252,10 +252,10 @@ Use template from `.context/session-log-template.md`:
 
 ### 9. Commit (Version Control)
 
-**Branch Convention:**
-- `feat/[area]-[short-description]` for features
-- `fix/[area]-[short-description]` for bug fixes
-- `chore/[area]-[short-description]` for maintenance
+**Workflow:**
+- Work directly on main branch
+- Commit when feature is complete and tested
+- Push directly to origin/main
 
 **Commit Message:**
 ```
@@ -270,7 +270,6 @@ Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>
 
 **Example:**
 ```bash
-git checkout -b feat/chat-offrecord
 git add .
 git commit -m "feat: add off-the-record chat mode
 
@@ -280,7 +279,10 @@ Adds UI toggle and backend support for temporary conversations.
 🤖 Generated with [Claude Code](https://claude.com/claude-code)
 
 Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
+git push origin main
 ```
+
+**Note:** No feature branches or PRs needed for solo development. Commit directly to main when work is complete and validated.
 
 ---
 

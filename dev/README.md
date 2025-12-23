@@ -1,476 +1,334 @@
-# Development System Guide
+# Development Guide
 
-This directory contains the complete development operations system for Matchmade. This README explains how status tracking, context transfer, and agent handoffs work.
+**Last Updated:** 2025-12-22 (Simplified for solo development)
 
 ---
 
-## The Context Transfer Problem
+## Quick Start
 
-**Challenge:** Each LLM session is stateless. Agents need to know:
-- What happened before them
-- What they should work on
-- Where to find relevant information
-- Who picks up after them
+### Starting New Work
+1. **Check state:** `cat dev/project-state.md`
+2. **Find task:** Check `dev/tickets/` or ask Feature Planner
+3. **Design:** Use Architect to create architecture doc
+4. **Code:** Implement on `main` branch
+5. **Commit:** Test, then commit to main
 
-**Solution:** A multi-layered tracking system with a central state file as the single source of truth.
+### Simple Git Workflow
+```bash
+# Work directly on main - no branches needed
+git add .
+git commit -m "feat: description
+
+🤖 Generated with [Claude Code](https://claude.com/claude-code)
+
+Co-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>"
+git push origin main
+```
 
 ---
 
 ## Directory Structure
 
 ```
-dev/
-├── README.md                    ← You are here (status tracking guide)
-├── project-state.md             ← CENTRAL STATE FILE (single source of truth)
+/Users/don/Projects/matchmade/
+├── .context/              # Product docs (briefs, values, northstar)
+│   ├── briefs/            # 10 feature briefs (01-10)
+│   ├── northstar.md       # Product vision
+│   ├── the-art-of-vibes.md
+│   ├── values-schema.md
+│   └── llm-dev-context.md # Build order & constraints
 │
-├── protocols/                   ← Development workflows
-│   ├── single-dev.md           (Small features, one agent)
-│   └── swarm-dev.md            (Large features, parallel agents)
+├── .claude/               # Claude Code config
+│   ├── context.md         # Navigation guide
+│   └── settings.local.json
 │
-├── roles/                       ← Agent role definitions (12 roles)
-│   ├── product-manager.md      (Strategic validation)
-│   ├── feature-planner.md      (Tactical planning)
-│   ├── architect.md            (Design contracts)
-│   ├── implement.md            (Code - single-dev)
-│   ├── backend.md              (API/DB - swarm)
-│   ├── frontend.md             (UI - swarm)
-│   ├── agent-logic.md          (AI/LLM logic - swarm)
-│   ├── qa.md                   (Testing)
-│   ├── review.md               (Code review)
-│   ├── debug.md                (Bug fixes)
-│   ├── optimize.md             (Performance)
-│   └── planner.md              (Task planning)
+├── dev/                   # Project management (SINGLE SOURCE OF TRUTH)
+│   ├── project-state.md   # Current state, handoffs, next steps
+│   ├── README.md          # This file
+│   ├── roles/             # Role definitions
+│   ├── protocols/         # Workflow docs
+│   ├── logs/              # Architecture documents
+│   └── tickets/           # All work specifications
 │
-├── tickets/                     ← Work tickets with acceptance criteria
-│   ├── slice-1-chat-profile.md (Example: completed)
-│   └── [feature-name].md       (Future tickets)
-│
-├── slices/                      ← Swarm mode work (vertical slices)
-│   └── [slice-name]/           (Each slice has architecture, status)
-│       ├── architecture.md
-│       └── README.md
-│
-├── swarms/                      ← Swarm execution logs
-│   └── [slice-name]-[date].md  (Log of parallel work)
-│
-├── logs/                        ← Single-dev session logs
-│   ├── [feature]-architecture-[date].md
-│   ├── [feature]-implementation-[date].md
-│   └── [feature]-review-[date].md
-│
-└── brief/                       ← Platform-specific briefs
-    ├── product.md              (Product overview)
-    ├── web.md                  (Web platform)
-    ├── ios.md                  (iOS platform - future)
-    └── android.md              (Android platform - future)
+└── web/                   # Next.js app
+    ├── .claude/agents/    # Subagent definitions
+    ├── app/
+    ├── prisma/
+    └── ...
 ```
+
+### Key Directories
+
+**`dev/logs/`** - Architecture documents
+- Design decisions, trade-offs, alternatives
+- Format: `[feature]-architecture-[date].md`
+- Created by: Architect
+
+**`dev/tickets/`** - Work specifications
+- ALL work items (features, refactors, slices)
+- Acceptance criteria, test plans, dependencies
+- Created by: Feature Planner
+
+**Principle:** Architecture thinking → `logs/`, work specs → `tickets/`
 
 ---
 
-## Status Tracking System
+## Development Roles (Streamlined)
 
-### Layer 1: Central State File (`project-state.md`)
+### Active Roles (5 core)
 
-**Purpose:** Single source of truth for "what's happening right now"
+**1. Product Manager** - Strategic validation
+- When: Starting features, validating ideas
+- Has subagent: ✅ `product-manager`
+- Output: Go/no-go decision
 
-**Contains:**
-- Current phase (which brief/feature we're on)
-- Active work (who's working on what)
-- Recent handoffs (what just finished)
-- Next up (what's coming)
-- Blockers and dependencies
-- Milestones and checkpoints
-- Agent context map (what each role needs to read)
+**2. Feature Planner** - Tactical planning
+- When: "What's next?" or breaking down features
+- Has subagent: ✅ `feature-planner`
+- Output: Ticket with acceptance criteria
 
-**Update frequency:** End of EVERY session
+**3. Architect** - Solution design
+- When: Have ticket, need design
+- Has subagent: ❌ (use Task tool with Plan)
+- Output: Architecture doc in `dev/logs/`
 
-**Who reads it:** EVERYONE at session start
+**4. Implement** - Write code
+- When: Have architecture, ready to code
+- Has subagent: ✅ `code-implementer`
+- Output: Code + tests
 
-### Layer 2: Session Logs (`.context/session-logs/`)
+**5. Debug** - Fix bugs
+- When: Something broken
+- Has subagent: ❌ (manual for now)
+- Output: Fix + debug notes
 
-**Purpose:** Historical record of what happened
+### Optional (use as needed)
 
-**Contains:**
-- Date and feature worked on
+**6. QA** - Testing validation (can skip for simple features)
+**7. Review** - Code review (solo dev might skip)
+
+### Archived (not needed yet)
+
+- **Optimize** - Performance tuning (premature)
+- **Planner** - Redundant with feature-planner
+- **Backend/Frontend/Agent-Logic** - Swarm mode only
+
+---
+
+## Typical Workflows
+
+### Small Feature
+```
+Feature Planner → ticket
+[Optional] Product Manager → validates
+Architect → designs
+Implement → codes + tests
+Commit → main
+```
+
+### Bug Fix
+```
+Debug → fixes
+Test → verifies
+Commit → main
+```
+
+### Large Feature
+```
+Feature Planner → multiple slice tickets
+For each slice:
+  Architect → design
+  Implement → code
+Commit → main
+```
+
+**When to skip:**
+- Skip Product Manager for obvious features
+- Skip Review for simple changes
+- Skip QA if tested during implementation
+
+---
+
+## Build Order (10 Features)
+
+1. ✅ Auth + context selection
+2. ✅ Agent chat UI + off-the-record
+3. 🟡 DerivedProfile extraction (refactoring)
+4. ⏳ Profile preview
+5. ⏳ Media upload
+6. ⏳ Attraction mode
+7. ⏳ Matching engine
+8. ⏳ Events
+9. ⏳ Notifications
+10. ⏳ Feedback + trust
+
+**Current:** Refactoring Brief 3 (Single Profile + Context Intent)
+
+---
+
+## Session Protocol
+
+### Starting
+```bash
+# Read current state
+cat dev/project-state.md
+
+# Or ask for guidance
+"What should I work on next?"
+```
+
+### Ending
+1. Update `dev/project-state.md`:
+   - Active Work
+   - Recent Handoffs
+   - Next Up
+2. Commit if ready
+3. Note blockers
+
+---
+
+## Essential Files
+
+**Must read:**
+- `dev/project-state.md` - Current state (START HERE ALWAYS)
+- `dev/tickets/[feature].md` - Work spec
+- `dev/logs/[feature]-architecture.md` - Design
+
+**Reference:**
+- `.context/llm-dev-context.md` - Build order, constraints
+- `.context/briefs/[NN]-[name].md` - Feature specs
+- `dev/protocols/single-dev.md` - Workflow
+
+---
+
+## Product Principles
+
+1. **Interface gets out of the way** - Uncluttered, clear
+2. **Real and honest** - No overpromising
+3. **Moves to real meetings** - Chemistry happens IRL
+4. **Values-first** - Not surface attraction
+5. **No engagement tricks** - No dark patterns
+
+---
+
+## Common Questions
+
+**Q: Where to put architecture docs?**
+→ `dev/logs/[feature]-architecture-[date].md`
+
+**Q: Where to put tickets?**
+→ `dev/tickets/[feature-name].md`
+
+**Q: What branch?**
+→ `main` always
+
+**Q: When to PR?**
+→ Never (solo dev)
+
+**Q: Need all 12 roles?**
+→ No, just 5 core + 2 optional
+
+**Q: When use Product Manager?**
+→ New/uncertain features
+
+**Q: When use Feature Planner?**
+→ "What's next?" or large features
+
+**Q: Can skip Architect?**
+→ Tiny changes yes, but most benefit from design-first
+
+---
+
+## Subagents Created
+
+In `web/.claude/agents/`:
+1. `product-manager.md` - Strategic validation
+2. `feature-planner.md` - Tactical planning
+3. `code-implementer.md` - Implementation
+
+**Note:** Architect uses Task tool with Plan subagent (not custom agent yet)
+
+---
+
+## Tech Stack
+
+- Frontend: Next.js 16, React 19, TypeScript, Tailwind 4
+- Backend: Next.js API routes
+- Database: PostgreSQL + Prisma 7
+- AI: Anthropic Claude
+- Auth: NextAuth.js
+- Host: Vercel
+
+---
+
+## Need Help?
+
+1. **What to build?** → Feature Planner subagent
+2. **Validate idea?** → Product Manager subagent
+3. **Need design?** → Architect role
+4. **Ready to code?** → Implement (code-implementer)
+5. **Bug?** → Debug role
+6. **Stuck?** → Read `dev/project-state.md`
+
+---
+
+## Context Transfer (How Agents Work Together)
+
+### The Problem
+Each LLM session is stateless. Agents need to know what happened before.
+
+### The Solution
+**`dev/project-state.md`** = single source of truth
+
+**Protocol:**
+1. **Start session** → Read project-state.md
+2. **Do work** → Create artifacts
+3. **End session** → Update project-state.md with handoff
+
+**Handoff includes:**
 - What was accomplished
-- Decisions made
-- Tests run
-- Artifacts created
-- Follow-ups noted
+- Artifacts created (with paths)
+- Who's next
+- What they need to read
 
-**Update frequency:** End of major work sessions
-
-**Who reads it:** Feature Planner, Product Manager (to understand current state)
-
-### Layer 3: Tickets (`dev/tickets/`)
-
-**Purpose:** Work definitions with acceptance criteria
-
-**Contains:**
-- Feature description
-- Acceptance criteria (what "done" looks like)
-- Dependencies
-- Technical requirements
-- Test plans
-- Readiness status
-
-**Update frequency:** When planning features
-
-**Who reads it:** All implementation roles (Architect, Implement, Backend, Frontend, QA)
-
-### Layer 4: Slice/Swarm Logs (`dev/slices/`, `dev/swarms/`)
-
-**Purpose:** Track parallel work in swarm mode
-
-**Contains:**
-- Architecture contracts
-- Role-specific logs (Backend, Frontend, Agent-Logic)
-- Integration status
-- Budget tracking
-
-**Update frequency:** During swarm work
-
-**Who reads it:** Swarm participants, QA
-
-### Layer 5: Implementation Logs (`dev/logs/`)
-
-**Purpose:** Detailed technical logs for single-dev mode
-
-**Contains:**
-- Architecture decisions
-- Implementation notes
-- Code changes
-- Test results
-- Review findings
-
-**Update frequency:** During single-dev work
-
-**Who reads it:** Implementation roles, reviewers
-
----
-
-## Handoff Protocol
-
-Every agent follows this pattern when finishing work:
-
-### 1. Complete Your Work
-- Finish assigned tasks
-- Run tests
-- Create required artifacts
-- Verify acceptance criteria
-
-### 2. Document What You Did
-- Update role-specific log (in `dev/logs/` or `dev/swarms/`)
-- Note any deviations from plan
-- List artifacts created
-- Record any issues or follow-ups
-
-### 3. Update Central State (`project-state.md`)
-Update these sections:
-- **Active Work** → Mark your task complete, clear the owner
-- **Recent Handoffs** → Add entry with date, from/to, artifacts, status
-- **Next Up** → Update to reflect new priority
-- **Blockers** → Add any new blockers discovered
-
-### 4. Explicit Handoff
-State clearly:
-- **Who's next:** Which role/agent should continue
-- **What they need:** List files/docs to read
-- **Context they need:** Any critical information
-- **Recommended action:** Specific next step
-
-### 5. Create Session Log (if major work)
-For significant sessions:
-- Create `.context/session-logs/[feature]-[date].md`
-- Summarize what was accomplished
-- Link to artifacts
-- Note follow-ups
-
----
-
-## Session Start Protocol
-
-**At the start of EVERY session:**
-
-### Step 1: Read Central State
+### Example Flow
 ```
-Read dev/project-state.md and tell me:
-1. What phase are we in?
-2. What was the last completed task?
-3. Who should I activate (which role)?
-4. What artifacts do I need to read?
-5. Are there any blockers?
-```
+Feature Planner → Creates ticket
+  ↓ Handoff: "Architect, design per ticket"
 
-### Step 2: Load Role Context
-Based on the role you're activating, read:
-- Role definition from `dev/roles/[role].md`
-- Required context files (see Agent Context Map in project-state.md)
-- Recent session logs (if needed for context)
-- Active ticket or slice (if continuing work)
+Architect → Creates architecture doc
+  ↓ Handoff: "Implement, build per architecture"
 
-### Step 3: Confirm Understanding
-Before starting work, confirm:
-- What you're building
-- Why (alignment with product)
-- Acceptance criteria
-- Any constraints or dependencies
-
----
-
-## Session End Protocol
-
-**At the end of EVERY session:**
-
-### Step 1: Update Central State
-```
-Update dev/project-state.md:
-1. Mark my task complete in "Active Work"
-2. Add handoff entry in "Recent Handoffs" with:
-   - Date
-   - From (my role) → To (next role)
-   - Artifacts created (with paths)
-   - Status (complete, blocked, etc.)
-3. Update "Next Up" with recommended next steps
-4. Add any new blockers
-```
-
-### Step 2: Create Role-Specific Log
-- Single-dev: `dev/logs/[feature]-[role]-[date].md`
-- Swarm: Append to `dev/swarms/[slice-name]-[date].md`
-
-### Step 3: Update Ticket Status
-- Mark completed acceptance criteria
-- Note any deviations
-- Add follow-ups
-
-### Step 4: Create Session Log (if major milestone)
-- `.context/session-logs/[feature]-[date].md`
-- High-level summary of session
-- Links to detailed logs
-
----
-
-## Agent Context Map
-
-Each agent has specific reading requirements. See `project-state.md` for the full table.
-
-**Key principle:** Agents should read only what they need, but must read the central state file.
-
-### Strategic Roles
-- **Product Manager:** Reads everything, writes strategic decisions
-- **Feature Planner:** Reads state + logs + tickets, writes tickets
-
-### Implementation Roles
-- **Architect:** Reads ticket + context, writes architecture
-- **Implement/Backend/Frontend:** Read architecture, write code
-- **Agent-Logic:** Reads architecture + philosophy docs, writes prompts
-
-### Quality Roles
-- **QA:** Reads ticket + implementation, writes validation
-- **Review:** Reads architecture + code, writes review
-- **Debug:** Reads error logs + code, writes fixes
-
----
-
-## How Context Flows Between Agents
-
-### Example: Profile Preview Feature (Single-Dev)
-
-```
-1. Feature Planner
-   READ: project-state.md, session-logs/, tickets/
-   WRITE: dev/tickets/profile-preview.md
-   HANDOFF: "Architect, design the profile preview component per ticket"
-
-2. Architect
-   READ: project-state.md, dev/tickets/profile-preview.md
-   WRITE: dev/logs/profile-preview-architecture-2025-12-22.md
-   HANDOFF: "Implement, build per architecture doc"
-
-3. Implement
-   READ: project-state.md, dev/logs/profile-preview-architecture-2025-12-22.md
-   WRITE: Code files + dev/logs/profile-preview-implementation-2025-12-22.md
-   HANDOFF: "Review, check code quality"
-
-4. Review
-   READ: project-state.md, architecture doc, implementation doc, code
-   WRITE: dev/logs/profile-preview-review-2025-12-22.md
-   HANDOFF: "QA, validate acceptance criteria"
-
-5. QA
-   READ: project-state.md, ticket, all logs, code
-   WRITE: dev/logs/profile-preview-qa-2025-12-22.md
-   HANDOFF: "Complete! Log session and commit."
-```
-
-**Key:** Each agent:
-1. Reads project-state.md (always)
-2. Reads previous agent's output
-3. Writes their own artifact
-4. Updates project-state.md with handoff
-
-### Example: Matching Engine (Swarm Mode)
-
-```
-1. Feature Planner
-   READ: project-state.md, session-logs/, tickets/
-   WRITE: dev/tickets/slice-7a-matching-engine.md
-   HANDOFF: "Architect, define contracts for matching engine"
-
-2. Architect
-   READ: project-state.md, ticket
-   WRITE: dev/slices/slice-7a-matching/architecture.md
-   HANDOFF: "Backend + Agent-Logic, work in parallel per contracts"
-
-3a. Backend (parallel)
-   READ: project-state.md, dev/slices/slice-7a-matching/architecture.md
-   WRITE: Code + dev/swarms/slice-7a-matching-2025-12-22.md (backend section)
-   HANDOFF: "QA, my portion is ready"
-
-3b. Agent-Logic (parallel)
-   READ: project-state.md, dev/slices/slice-7a-matching/architecture.md
-   WRITE: Prompts + code + dev/swarms/slice-7a-matching-2025-12-22.md (agent section)
-   HANDOFF: "QA, my portion is ready"
-
-4. QA
-   READ: project-state.md, ticket, architecture, swarm log, all code
-   WRITE: dev/swarms/slice-7a-matching-2025-12-22.md (QA section)
-   HANDOFF: "Complete! Both backend and agent-logic validated."
-```
-
-**Key:** Parallel agents write to the same swarm log file in separate sections.
-
----
-
-## Quick Reference Commands
-
-### Starting a session
-```bash
-# General start
-"Read dev/project-state.md and tell me what to work on next"
-
-# Specific role
-"Activate Feature Planner role. Read dev/project-state.md and identify next feature."
-
-# Continue existing work
-"Read dev/project-state.md. Continue from where we left off."
-
-# Debug session
-"Read dev/project-state.md. Debug issue: [description]"
-```
-
-### Ending a session
-```bash
-# Update state + handoff
-"Update dev/project-state.md with:
-1. What I accomplished
-2. Artifacts created
-3. Who's next and what they need to read"
-
-# Create session log
-"Create session log in .context/session-logs/ summarizing today's work"
-```
-
-### Checking status
-```bash
-# Quick status
-"Read dev/project-state.md and summarize current status"
-
-# Detailed progress
-"Read dev/project-state.md and latest 3 session logs. What's our progress on the build order?"
-
-# Check blockers
-"Read dev/project-state.md. Are there any blockers?"
+Implement → Writes code + tests
+  ↓ Handoff: "Complete! Ready to commit"
 ```
 
 ---
 
-## Best Practices
+## Simplified Workflow Summary
 
-### For Status Tracking
-1. **Always read project-state.md first** - It's the single source of truth
-2. **Update project-state.md at end of session** - Keep it current
-3. **Be explicit in handoffs** - Name the next agent, list what they need
-4. **Link to artifacts** - Always include file paths
-5. **Note blockers immediately** - Don't let them hide
+**Old (Complex):**
+- Feature branches
+- Pull requests
+- Swarm logs
+- Slice directories
 
-### For Context Transfer
-1. **Write for future you** - Assume total memory loss
-2. **Be specific** - "See line 45" not "there's a function"
-3. **Summarize decisions** - Why did we choose this approach?
-4. **List follow-ups** - What needs to happen next?
-5. **Cross-reference** - Link related artifacts
+**New (Simple):**
+- Work on main
+- Commit when ready
+- Single dev/ directory
+- Architecture → `logs/`, tickets → `tickets/`
 
-### For Agent Handoffs
-1. **Read your role definition** - Know your scope
-2. **Don't overstep** - Hand off to appropriate role
-3. **Complete your work** - Don't leave partial implementations
-4. **Document deviations** - If you deviated from plan, say why
-5. **Test before handing off** - Don't pass broken work
+**Why?**
+- Solo development
+- Faster iteration
+- Less overhead
+- Can reintroduce branches later if needed
 
 ---
 
-## Troubleshooting
+**Keep it simple. Work on main. Use subagents for context. Commit when ready.**
 
-### "I don't know what to work on"
-→ Read `dev/project-state.md` section "Next Up"
-
-### "I don't have enough context"
-→ Check "Agent Context Map" in `project-state.md` for what your role needs to read
-
-### "The last session left things unclear"
-→ Read latest session log in `.context/session-logs/`
-→ Check "Recent Handoffs" in `project-state.md`
-
-### "I found a blocker"
-→ Add it to "Blockers & Dependencies" section in `project-state.md`
-→ Note what needs to happen to unblock
-
-### "Work got interrupted mid-task"
-→ Update `project-state.md` with current state
-→ Mark task as "in progress" with notes on what's left
-→ Create handoff for next session (even if same role)
-
----
-
-## Integration with Existing Tools
-
-This status tracking system complements (doesn't replace) existing tools:
-
-| Tool | Purpose | Status Tracking Role |
-|------|---------|---------------------|
-| `.codex/context.md` | Navigation and prompts | Entry point, routes to project-state.md |
-| `.claude/context.md` | Navigation and prompts | Entry point, routes to project-state.md |
-| `.context/session-logs/` | Historical record | Source of truth for past work |
-| `dev/project-state.md` | Current state | Single source of truth for NOW |
-| `dev/tickets/` | Work definitions | What to build |
-| `dev/protocols/` | How to work | Workflow patterns |
-| `dev/roles/` | Role definitions | Agent responsibilities |
-
-**Flow:** Entry file → project-state.md → role → ticket → work → log → update state
-
----
-
-## Summary
-
-**The core insight:** Context transfer between stateless agents requires:
-1. **Central state file** (`project-state.md`) - single source of truth
-2. **Explicit handoffs** - each agent names who's next
-3. **Linked artifacts** - every output has a file path
-4. **Read-before-write** - always read state before starting
-
-**The protocol:**
-- **Start:** Read `project-state.md` → activate role → read context
-- **Work:** Complete task → create artifacts → test
-- **End:** Update `project-state.md` → handoff to next agent → log session
-
-**The result:** Each agent knows exactly what to do, who came before, and who comes next.
-
----
-
-For detailed role instructions, see `dev/roles/README.md`.
-
-For workflow patterns, see `dev/protocols/single-dev.md` and `dev/protocols/swarm-dev.md`.
-
-For current project state, always check `dev/project-state.md`.
+For detailed role info: `dev/roles/README.md`
+For workflow patterns: `dev/protocols/single-dev.md`
+For current state: `dev/project-state.md` (always start here)

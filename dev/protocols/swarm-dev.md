@@ -1,4 +1,12 @@
-# Swarm Protocol
+# Swarm Protocol (ARCHIVED - Not Currently Used)
+
+**Note:** This workflow is archived. The project currently uses a simplified single-branch workflow (see `single-dev.md`) for solo development. This document is preserved for potential future use if parallel development becomes necessary or the team grows.
+
+**Last Used:** December 2025
+**Status:** Archived
+**Reason:** Solo development - branching and parallel work overhead not justified
+
+---
 
 ## When to Use
 - Large features spanning multiple areas (backend + frontend + AI logic)

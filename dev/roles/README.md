@@ -1,6 +1,6 @@
 # Development Roles Guide
 
-This directory contains all role definitions for both single-dev and swarm development modes. Each role has a specific responsibility, scope, and place in the workflow.
+This directory contains all role definitions. Each role has a specific responsibility, scope, and place in the workflow. Currently using single-dev workflow; swarm mode roles (Backend, Frontend, Agent-Logic) are preserved for potential future use.
 
 ---
 
@@ -12,10 +12,10 @@ This directory contains all role definitions for both single-dev and swarm devel
 
 ### Implementation Roles
 3. **architect.md** - Design contracts and architecture
-4. **implement.md** - Write code (single-dev only)
-5. **backend.md** - Backend/API implementation (swarm only)
-6. **frontend.md** - UI/component implementation (swarm only)
-7. **agent-logic.md** - LLM/AI logic, prompts, matching (swarm only)
+4. **implement.md** - Write code (current workflow)
+5. **backend.md** - Backend/API implementation (archived - swarm only)
+6. **frontend.md** - UI/component implementation (archived - swarm only)
+7. **agent-logic.md** - LLM/AI logic, prompts, matching (archived - swarm only)
 
 ### Quality & Optimization Roles
 8. **qa.md** - Testing and validation
@@ -82,16 +82,16 @@ Feature Planner reviews current state
 
 **Two modes:**
 
-**Single-Dev Mode:**
+**Current Workflow (Single-Dev):**
 - Design complete solution (components, API, DB, state)
 - Create architecture document in `dev/logs/[feature]-architecture-[date].md`
 - Hand off to Implement role
 
-**Swarm Mode:**
+**Archived Workflow (Swarm Mode):**
 - Define ONLY contracts (API routes, DB models, events, config)
 - Enforce budgets (≤400 LOC, ≤2 deps, ≤1 table)
-- Create architecture in `dev/slices/[slice-name]/architecture.md`
 - Hand off to Backend/Frontend/Agent-Logic roles (parallel)
+- Not currently used - preserved for future parallel development
 
 **Example:**
 ```

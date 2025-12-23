@@ -53,11 +53,12 @@ Before activating this role, you MUST know:
 - **Existing tickets** in `dev/tickets/`
   - What's already planned
   - What's in progress
+  - What's completed
   - Any blockers or dependencies
 
-- **Existing slices** in `dev/slices/`
-  - Swarm work in progress
-  - Completed slices
+- **Architecture docs** in `dev/logs/`
+  - Design decisions and rationale
+  - Technical constraints
 
 ### Dependencies:
 - **Codebase state** - What's actually built (not just planned)
@@ -83,8 +84,8 @@ Before activating this role, you MUST know:
    - List completed features
 
 3. **What's currently in progress?**
-   - Check `dev/tickets/` for active tickets
-   - Check `dev/slices/` for active slices
+   - Check `dev/tickets/` for active and completed tickets
+   - Check `dev/logs/` for architecture documents
    - Note any blockers or dependencies
 
 4. **What's the codebase state?**
@@ -345,7 +346,7 @@ When completing a Feature Planner session, provide:
 **Before each planning session:**
 1. Read latest 5-10 session logs from `.context/session-logs/`
 2. Check all tickets in `dev/tickets/` (status, completion)
-3. Check all slices in `dev/slices/` (progress, completion)
+3. Review architecture docs in `dev/logs/` (design decisions)
 4. Review codebase state (what's actually built)
 
 **Feature Planner tracks:**

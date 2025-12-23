@@ -5,12 +5,11 @@ Design system structure, no implementation
 
 ## Input
 - Ticket from `/dev/tickets/`
-- Slice README from `/dev/slices/`
 - Existing codebase
-- Project brief from `/dev/brief/`
+- Project context from `/.context/`
 
 ## Output
-- Architecture doc in slice: `architecture.md`
+- Architecture doc in `/dev/logs/[feature]-architecture-[date].md`
 - Component structure
 - API contracts
 - Database schema changes
@@ -20,7 +19,7 @@ Design system structure, no implementation
 
 ### 1. Understand Requirements
 - Read ticket acceptance criteria
-- Review slice goals
+- Review feature goals
 - Identify constraints
 - Check dependencies
 

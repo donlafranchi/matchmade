@@ -205,6 +205,9 @@
 - ✅ Option 1 architecture designed: Single Profile + Context-Specific Intent Fields (2025-12-22)
 - ✅ Context boundaries defined for 5 relationship types (2025-12-22)
 - ✅ 3 slice tickets created for Option 1 implementation (2025-12-22)
+- ✅ Simplified to single-branch workflow (main only) (2025-12-22)
+- ✅ Removed dev/slices/ and dev/swarms/ folders (2025-12-22)
+- ✅ Clarified dev/logs/ (architecture) vs dev/tickets/ (work specs) (2025-12-22)
 
 ### Upcoming Milestones
 - 🎯 MVP Checkpoint 1: Briefs 1-4 complete (user can chat, see profile)
@@ -222,13 +225,13 @@
 | Agent | Must Read | Should Read | Output |
 |-------|-----------|-------------|--------|
 | **Product Manager** | project-state.md, northstar.md, llm-dev-context.md, latest 3 session logs | briefs/, the-art-of-vibes.md | Go/no-go decision, strategic guidance |
-| **Feature Planner** | project-state.md, llm-dev-context.md (build order), latest 5 session logs, tickets/, slices/ | briefs/[NN]-*.md | Ticket in dev/tickets/ |
-| **Architect** | project-state.md, ticket, llm-dev-context.md, values-schema.md | Existing codebase patterns | Architecture doc in dev/logs/ or dev/slices/ |
-| **Implement** | project-state.md, architecture doc | llm-dev-context.md, values-schema.md | Code + tests, implementation doc |
-| **Backend** | project-state.md, slice architecture | values-schema.md (for DB) | API routes + Prisma schema |
-| **Frontend** | project-state.md, slice architecture | llm-dev-context.md (UX principles) | Components + pages |
-| **Agent-Logic** | project-state.md, slice architecture | values-schema.md, the-art-of-vibes.md | Prompts in playbooks/, matching logic |
-| **QA** | project-state.md, ticket (acceptance criteria), implementation artifacts | All test artifacts | Validation report in dev/logs/ or dev/swarms/ |
+| **Feature Planner** | project-state.md, llm-dev-context.md (build order), latest 5 session logs, tickets/ | briefs/[NN]-*.md | Ticket in dev/tickets/ |
+| **Architect** | project-state.md, ticket, llm-dev-context.md, values-schema.md | Existing codebase patterns | Architecture doc in dev/logs/ |
+| **Implement** | project-state.md, architecture doc | llm-dev-context.md, values-schema.md | Code + tests, work notes (if needed) |
+| **Backend** | project-state.md, architecture doc | values-schema.md (for DB) | API routes + Prisma schema |
+| **Frontend** | project-state.md, architecture doc | llm-dev-context.md (UX principles) | Components + pages |
+| **Agent-Logic** | project-state.md, architecture doc | values-schema.md, the-art-of-vibes.md | Prompts in playbooks/, matching logic |
+| **QA** | project-state.md, ticket (acceptance criteria), implementation artifacts | All test artifacts | Validation report in dev/logs/ |
 | **Review** | project-state.md, architecture, implementation | llm-dev-context.md (conventions) | Review report with approve/revise |
 | **Debug** | project-state.md, error logs, relevant code | Recent changes | Fix + debug report in dev/logs/ |
 
@@ -270,12 +273,11 @@ Summarize current progress and recommend next steps.
    - Update "Next Up" section
    - Update blockers if any
 
-2. **Create session log**
-   - For single-dev: `dev/logs/[feature]-[role]-[date].md`
-   - For swarm: `dev/swarms/[slice-name]-[date].md`
+2. **Create work notes (if needed)**
+   - For complex work: `dev/logs/[feature]-[role]-[date].md`
    - Overall session: `.context/session-logs/[feature]-[date].md`
 
-3. **Update ticket/slice status**
+3. **Update ticket status**
    - Mark completed items
    - Note any deviations or follow-ups
 
@@ -290,8 +292,8 @@ Summarize current progress and recommend next steps.
 
 - **Stateless Sessions:** Each session starts fresh. This file is the single source of truth.
 - **Session Logs:** Historical record in `.context/session-logs/`
-- **Tickets:** Work definitions in `dev/tickets/`
-- **Slices:** Swarm work contracts in `dev/slices/`
+- **Tickets:** ALL work specifications in `dev/tickets/`
+- **Architecture Docs:** Design decisions in `dev/logs/`
 - **This File:** Current state, active work, next steps
 
 **Update this file frequently.** It's the bridge between stateless sessions.
@@ -332,11 +334,9 @@ Summarize current progress and recommend next steps.
 ├── dev/                   # Project management (SINGLE SOURCE OF TRUTH)
 │   ├── project-state.md   # Current state, handoffs, next steps
 │   ├── roles/             # 12 role definitions
-│   ├── protocols/         # single-dev.md, swarm-dev.md
+│   ├── protocols/         # single-dev.md (swarm-dev.md archived)
 │   ├── logs/              # Architecture documents
-│   ├── tickets/           # All tickets (old + new)
-│   ├── slices/            # Swarm slice contracts
-│   └── swarms/            # Swarm execution logs
+│   └── tickets/           # All work specifications
 └── web/                   # Next.js application
     ├── .claude/agents/    # Agent definitions (feature-planner, product-manager)
     ├── app/               # Next.js app directory
