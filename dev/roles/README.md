@@ -1,6 +1,12 @@
 # Development Roles Guide
 
-This directory contains all role definitions. Each role has a specific responsibility, scope, and place in the workflow. Currently using single-dev workflow; swarm mode roles (Backend, Frontend, Agent-Logic) are preserved for potential future use.
+**Purpose:** Workflow role descriptions (what each role does conceptually).
+
+**Note:** For executable agent definitions used by Claude Code, see `.claude/agents/` at root level.
+
+This directory documents role concepts and workflows. The agents in `.claude/agents/` implement these roles.
+
+Currently using single-dev workflow; swarm mode roles (Backend, Frontend, Agent-Logic) are archived for potential future use.
 
 ---
 

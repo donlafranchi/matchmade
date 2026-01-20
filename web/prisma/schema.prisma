@@ -22,6 +22,18 @@ model User {
   updatedAt       DateTime          @updatedAt
   contextProfiles ContextProfile[]
   chatMessages    ChatMessage[]
+
+  // NEW: Single profile per user (shared across contexts)
+  profile         Profile?
+
+  // NEW: Context-specific intents
+  contextIntents  ContextIntent[]
+
+  // NEW: Interpretation feedback (Phase 2)
+  interpretationFeedback InterpretationFeedback[]
+
+  // NEW: Background analysis jobs (Phase 2, Ticket 2-03)
+  analysisJobs    AnalysisJob[]
 }
 
 model ContextProfile {
@@ -35,7 +47,7 @@ model ContextProfile {
 
   @@unique([userId, contextType])
   chatMessages ChatMessage[]
-  profile      Profile?
+  profileOld   ProfileOld?
 }
 
 model ChatMessage {
@@ -50,7 +62,8 @@ model ChatMessage {
   createdAt        DateTime              @default(now())
 }
 
-model Profile {
+// OLD Profile model (to be deprecated after migration)
+model ProfileOld {
   id               String          @id @default(cuid())
   contextProfile   ContextProfile  @relation(fields: [contextProfileId], references: [id], onDelete: Cascade)
   contextProfileId String          @unique
@@ -59,6 +72,129 @@ model Profile {
   missing          String[]
   createdAt        DateTime        @default(now())
   updatedAt        DateTime        @updatedAt
+
+  @@map("Profile")
+}
+
+// NEW Profile model (Option 1: Single profile per user, shared across contexts)
+model Profile {
+  id               String          @id @default(cuid())
+  user             User            @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId           String          @unique
+
+  // Shared fields (Json for flexible structure)
+  coreValues       Json            @default("[]")    // Array of strings
+  beliefs          Json            @default("{}")    // Object with belief categories
+  interactionStyle Json            @default("{}")    // Object with style preferences
+  lifestyle        Json            @default("{}")    // Object with lifestyle info
+  constraints      Json            @default("[]")    // Array of constraint strings
+
+  // Shared scalar fields
+  location         String?
+  ageRange         String?
+
+  // Legacy field (for backward compatibility during migration)
+  name             String?
+
+  // Metadata
+  completeness     Int             @default(0)
+  missing          String[]
+
+  // Interpretation fields (Phase 2)
+  interpretations  Json            @default("{}")  // Therapeutic insights
+  rawPatterns      Json            @default("{}")  // Word freq, themes, tone
+  lastAnalyzed     DateTime?                       // When last analyzed
+
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  @@map("ProfileNew")
+}
+
+// Context-specific intent fields (one per user per context)
+model ContextIntent {
+  id          String                   @id @default(cuid())
+  user        User                     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  contextType RelationshipContextType
+
+  // Romantic context fields
+  relationshipTimeline      String?  // "taking_my_time" | "open_to_soon" | "actively_looking"
+  exclusivityExpectation    String?  // "monogamous" | "open" | "figuring_it_out"
+  familyIntentions          String?  // "want_kids" | "dont_want_kids" | "open" | "already_have"
+  attractionImportance      String?  // "critical" | "important" | "balanced" | "less_important"
+
+  // Friendship context fields
+  friendshipDepth           String?  // "casual" | "close" | "best_friend"
+  groupActivityPreference   String?  // "one_on_one" | "small_group" | "large_group" | "flexible"
+  emotionalSupportExpectation String? // "minimal" | "moderate" | "high"
+
+  // Professional context fields
+  partnershipType           String?  // "cofounder" | "collaborator" | "advisor" | "employee" | "contractor"
+  commitmentHorizon         String?  // "project_based" | "ongoing" | "long_term"
+  complementarySkills       Json?    // Array of strings
+  equityOrRevShare          String?  // "equity" | "rev_share" | "salary" | "hybrid" | "tbd"
+
+  // Creative context fields
+  creativeType              String?  // "music" | "writing" | "visual_art" | "film" | "performance" | "other"
+  roleNeeded                String?  // "co_creator" | "contributor" | "feedback" | "production"
+  processStyle              String?  // "structured" | "spontaneous" | "hybrid"
+  egoBalance                String?  // "shared_vision" | "lead_follow" | "independent"
+  compensationExpectation   String?  // "paid" | "profit_share" | "free" | "depends"
+
+  // Service context fields
+  serviceType               String?  // "offering" | "seeking"
+  budgetRange               String?  // "under_1k" | "1k_5k" | "5k_20k" | "20k_plus" | "flexible"
+  timelineNeeded            String?  // "urgent" | "weeks" | "months" | "flexible"
+  credentialsRequired       String?  // "licensed" | "experienced" | "portfolio" | "flexible"
+
+  // Metadata
+  completeness     Int             @default(0)
+  missing          String[]
+
+  // Interpretation fields (Phase 2)
+  interpretations  Json            @default("{}")  // Context-specific insights
+  rawPatterns      Json            @default("{}")  // Context patterns
+  lastAnalyzed     DateTime?                       // When last analyzed
+
+  createdAt        DateTime        @default(now())
+  updatedAt        DateTime        @updatedAt
+
+  @@unique([userId, contextType])
+}
+
+// User feedback on interpretations (Phase 2)
+model InterpretationFeedback {
+  id               String   @id @default(cuid())
+  user             User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId           String
+  interpretationId String   // e.g., "profile.gabor_mate.attachment_style"
+  accurate         Boolean  // User marked as accurate/inaccurate
+  userCorrection   String?  // What user said it should be
+  createdAt        DateTime @default(now())
+
+  @@index([userId])
+  @@index([interpretationId])
+}
+
+// Background analysis job queue (Phase 2, Ticket 2-03)
+model AnalysisJob {
+  id          String   @id @default(cuid())
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  contextType String   // RelationshipContextType as string
+  priority    String   // 'high' | 'medium' | 'low'
+  status      String   // 'pending' | 'processing' | 'completed' | 'failed'
+  source      String   // 'chat' | 'view' | 'manual'
+  error       String?  // Error message if failed
+  retries     Int      @default(0)
+  createdAt   DateTime @default(now())
+  startedAt   DateTime?
+  completedAt DateTime?
+
+  @@index([userId])
+  @@index([status])
+  @@index([priority, createdAt])
 }
 
 enum RelationshipContextType {

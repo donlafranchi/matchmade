@@ -1,89 +1,65 @@
 import { NextResponse } from "next/server";
 import { requireSessionUser } from "@/lib/auth";
-import { RelationshipContextType, prisma } from "@/lib/prisma";
-import {
-  computeCompleteness,
-  getOrCreateProfile,
-  mergeProfile,
-  sanitizePatch,
-  toDto,
-} from "@/lib/profile";
+import { getSharedProfileDto, updateSharedProfile } from "@/lib/profile-shared";
+import { ProfileDto } from "@/lib/types";
 
-function isContextType(value: string): value is RelationshipContextType {
-  return ["romantic", "friendship", "professional", "creative", "service"].includes(
-    value,
-  );
-}
-
-export async function GET(req: Request) {
+/**
+ * GET /api/profile
+ * Fetch shared profile for authenticated user (no contextType needed)
+ */
+export async function GET() {
   const user = await requireSessionUser();
-  const { searchParams } = new URL(req.url);
-  const contextType = searchParams.get("contextType") as RelationshipContextType | null;
 
-  if (!contextType || !isContextType(contextType)) {
-    return NextResponse.json({ error: "Invalid contextType" }, { status: 400 });
-  }
-
-  const contextProfile = await prisma.contextProfile.findUnique({
-    where: { userId_contextType: { userId: user.id, contextType } },
-  });
-
-  if (!contextProfile) {
-    return NextResponse.json({ error: "Context profile not found" }, { status: 404 });
-  }
-
-  const profileRow = await getOrCreateProfile(contextProfile.id);
-  const dto = toDto(profileRow);
+  const result = await getSharedProfileDto(user.id);
 
   return NextResponse.json({
-    profile: dto.profile,
-    completeness: dto.completeness,
-    missing: dto.missing,
+    profile: result.profile,
+    completeness: result.completeness,
+    missing: result.missing,
   });
 }
 
+/**
+ * PUT /api/profile
+ * Update shared profile for authenticated user
+ */
 export async function PUT(req: Request) {
   const user = await requireSessionUser();
-  let body: { contextType?: RelationshipContextType; patch?: Record<string, unknown> };
+
+  let body: { patch?: Partial<ProfileDto> };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const { contextType, patch } = body;
-  if (!contextType || !isContextType(contextType)) {
-    return NextResponse.json({ error: "Invalid contextType" }, { status: 400 });
+  const { patch } = body;
+  if (!patch) {
+    return NextResponse.json({ error: "Missing patch" }, { status: 400 });
   }
 
-  const contextProfile = await prisma.contextProfile.findUnique({
-    where: { userId_contextType: { userId: user.id, contextType } },
-  });
+  try {
+    const updated = await updateSharedProfile(user.id, patch);
 
-  if (!contextProfile) {
-    return NextResponse.json({ error: "Context profile not found" }, { status: 404 });
+    return NextResponse.json({
+      ok: true,
+      profile: {
+        coreValues: updated.coreValues,
+        beliefs: updated.beliefs,
+        interactionStyle: updated.interactionStyle,
+        lifestyle: updated.lifestyle,
+        constraints: updated.constraints,
+        location: updated.location,
+        ageRange: updated.ageRange,
+        name: updated.name,
+      },
+      completeness: updated.completeness,
+      missing: updated.missing,
+    });
+  } catch (error: any) {
+    return NextResponse.json(
+      { ok: false, error: error.message || "Failed to update profile" },
+      { status: 500 }
+    );
   }
-
-  const cleanPatch = sanitizePatch(patch || {});
-  const profileRow = await getOrCreateProfile(contextProfile.id);
-  const currentData = (profileRow.data as Record<string, unknown>) || {};
-  const merged = mergeProfile(currentData, cleanPatch);
-  const { completeness, missing } = computeCompleteness(merged);
-
-  const updated = await prisma.profile.update({
-    where: { id: profileRow.id },
-    data: {
-      data: merged,
-      completeness,
-      missing,
-    },
-  });
-
-  const dto = toDto(updated);
-
-  return NextResponse.json({
-    profile: dto.profile,
-    completeness: dto.completeness,
-    missing: dto.missing,
-  });
 }

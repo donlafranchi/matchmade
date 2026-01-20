@@ -9,16 +9,11 @@ type MessageType = {
   isAgent: boolean;
 };
 
-type ContextOption = "romantic" | "friendship" | "professional";
-
 export default function OnboardingPage() {
   const router = useRouter();
   const [messages, setMessages] = useState<MessageType[]>([]);
-  const [showChoices, setShowChoices] = useState(false);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [selectedContexts, setSelectedContexts] = useState<Set<ContextOption>>(
-    new Set()
-  );
+  const [showContinue, setShowContinue] = useState(false);
 
   useEffect(() => {
     // Show messages sequentially with natural delays
@@ -30,7 +25,7 @@ export default function OnboardingPage() {
           ...prev,
           {
             id: 1,
-            text: "Hey, I'm here to help you meet the right people—whether that's finding new friends, meeting someone you could fall for, or networking personally or professionally.",
+            text: "This isn't like other apps. No endless swiping, no games. We do the filtering so you can focus on actually meeting people.",
             isAgent: true,
           },
         ]);
@@ -43,7 +38,7 @@ export default function OnboardingPage() {
           ...prev,
           {
             id: 2,
-            text: "Here's how this works: we focus on what matters to you first (values, lifestyle, what you're actually looking for), then attraction, then we help you meet in real life. No endless swiping. No games. Just honest connections.",
+            text: "We match people based on values and interests - the stuff that actually matters for a real connection. Chemistry? That's what meeting in person is for.",
             isAgent: true,
           },
         ]);
@@ -56,102 +51,73 @@ export default function OnboardingPage() {
           ...prev,
           {
             id: 3,
-            text: "So what brings you here? What are you hoping to find right now?",
+            text: "This works for more than dating. Maybe you moved to a new city and want to make friends. Or you're picking up a new hobby and want to meet people who share that interest. We can help with that too.",
             isAgent: true,
           },
         ]);
-        setShowChoices(true);
       }, 5000)
+    );
+
+    timers.push(
+      setTimeout(() => {
+        setMessages((prev) => [
+          ...prev,
+          {
+            id: 4,
+            text: "I'll ask you some questions to understand what you're looking for. The more honest you can be, the better matches we can find. And just so you know - we never share your information with anyone, for any reason.",
+            isAgent: true,
+          },
+        ]);
+        setShowContinue(true);
+      }, 7500)
     );
 
     return () => timers.forEach(clearTimeout);
   }, []);
 
-  const toggleContext = (context: ContextOption) => {
-    setSelectedContexts((prev) => {
-      const newSet = new Set(prev);
-      if (newSet.has(context)) {
-        newSet.delete(context);
-      } else {
-        newSet.add(context);
-      }
-      return newSet;
-    });
-  };
-
-  const handleSubmit = async () => {
-    if (selectedContexts.size === 0) return;
-
-    setShowChoices(false);
+  const handleContinue = async () => {
+    setShowContinue(false);
     setIsProcessing(true);
 
-    const contextArray = Array.from(selectedContexts);
-    const choiceText =
-      contextArray.length === 1
-        ? contextArray[0] === "romantic"
-          ? "Looking for romance"
-          : contextArray[0] === "friendship"
-            ? "Looking for friends"
-            : "Professional networking"
-        : `Looking for ${contextArray.length} things`;
-
-    // Add user's choice to messages
-    setMessages((prev) => [
-      ...prev,
-      {
-        id: Date.now(),
-        text: choiceText,
-        isAgent: false,
-      },
-    ]);
-
-    // Create context profiles
+    // Create default romantic context
     try {
       const response = await fetch("/api/onboarding", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contexts: contextArray }),
+        body: JSON.stringify({ contexts: ["romantic"] }),
       });
 
       if (response.ok) {
-        // Show confirmation message
         setTimeout(() => {
           setMessages((prev) => [
             ...prev,
             {
-              id: Date.now() + 1,
-              text: "Cool. Let's get started.",
+              id: Date.now(),
+              text: "Let's go.",
               isAgent: true,
             },
           ]);
 
-          // Redirect to first context
           setTimeout(() => {
-            router.push(`/contexts/${contextArray[0]}`);
-          }, 1500);
-        }, 800);
+            router.push("/contexts/romantic");
+          }, 1000);
+        }, 500);
       }
     } catch (error) {
-      console.error("Error creating contexts:", error);
+      console.error("Error creating context:", error);
       setIsProcessing(false);
-      setShowChoices(true);
+      setShowContinue(true);
     }
   };
-
-  const contextOptions: { value: ContextOption; label: string }[] = [
-    { value: "friendship", label: "Looking for friends" },
-    { value: "romantic", label: "Looking for romance" },
-    { value: "professional", label: "Professional networking" },
-  ];
 
   return (
     <div className="flex min-h-screen justify-center bg-zinc-50 px-6 py-12">
       <main className="w-full max-w-2xl space-y-6">
         {/* Header */}
         <div className="text-center">
-          <p className="text-sm uppercase tracking-[0.2em] text-zinc-500">
-            Welcome
-          </p>
+          <h1 className="text-2xl font-semibold text-zinc-800">
+            How this works
+          </h1>
         </div>
 
         {/* Chat container */}
@@ -173,38 +139,15 @@ export default function OnboardingPage() {
             </div>
           ))}
 
-          {/* Choice checkboxes */}
-          {showChoices && !isProcessing && (
-            <div className="space-y-4 pt-4">
-              <div className="space-y-3">
-                {contextOptions.map((option) => (
-                  <label
-                    key={option.value}
-                    className={`flex items-center gap-3 rounded-xl border-2 px-5 py-4 cursor-pointer transition ${
-                      selectedContexts.has(option.value)
-                        ? "border-black bg-zinc-50"
-                        : "border-zinc-200 bg-white hover:border-zinc-400"
-                    }`}
-                  >
-                    <input
-                      type="checkbox"
-                      checked={selectedContexts.has(option.value)}
-                      onChange={() => toggleContext(option.value)}
-                      className="h-5 w-5 rounded border-zinc-300 text-black focus:ring-0 focus:ring-offset-0"
-                    />
-                    <span className="text-[15px]">{option.label}</span>
-                  </label>
-                ))}
-              </div>
-
-              {selectedContexts.size > 0 && (
-                <button
-                  onClick={handleSubmit}
-                  className="w-full rounded-xl bg-black px-5 py-4 text-[15px] text-white transition hover:bg-zinc-800"
-                >
-                  Continue
-                </button>
-              )}
+          {/* Continue button */}
+          {showContinue && !isProcessing && (
+            <div className="pt-4">
+              <button
+                onClick={handleContinue}
+                className="w-full rounded-xl bg-black px-5 py-4 text-[15px] text-white transition hover:bg-zinc-800"
+              >
+                Let's get started
+              </button>
             </div>
           )}
 
@@ -223,7 +166,7 @@ export default function OnboardingPage() {
 
         {/* Subtle footer */}
         <p className="text-center text-sm text-zinc-500">
-          One step at a time. Keep it real.
+          Your information stays private. Always.
         </p>
       </main>
     </div>

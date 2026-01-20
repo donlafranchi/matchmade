@@ -1,3 +1,4 @@
+import "dotenv/config";
 import { PrismaClient, ChatRole, RelationshipContextType, TonePreference } from "../app/generated/prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";

@@ -7,7 +7,11 @@
       "Bash(cp:*)",
       "Bash(mkdir:*)",
       "Bash(npm run lint:*)",
-      "Bash(git check-ignore:*)"
+      "Bash(git check-ignore:*)",
+      "Bash(npx tsx:*)",
+      "Bash(find:*)",
+      "Bash(npm run build:*)",
+      "Bash(ls:*)"
     ]
   }
 }

@@ -1,0 +1,36 @@
+{
+  "usersProcessed": 3,
+  "profilesCreated": 3,
+  "contextIntentsCreated": 7,
+  "conflicts": [],
+  "unmappedFields": [
+    {
+      "userId": "user_qa1",
+      "contextType": "romantic",
+      "fields": {
+        "intent": "long-term",
+        "preferences": [
+          "hiking",
+          "jazz"
+        ],
+        "dealbreakers": [
+          "smoking"
+        ]
+      }
+    },
+    {
+      "userId": "cmjfwhbqb0000qe2g6xd8iww9",
+      "contextType": "romantic",
+      "fields": {
+        "intent": "someone to share memories with",
+        "preferences": [
+          "adventure"
+        ],
+        "dealbreakers": [
+          "negative"
+        ]
+      }
+    }
+  ],
+  "errors": []
+}
