@@ -1,5 +1,8 @@
 "use client";
 
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { signOut } from "next-auth/react";
 import type { ProfileDto, ContextIntentDto } from "@/lib/types";
 
 type Props = {
@@ -81,6 +84,32 @@ function FieldRow({
 }
 
 export function ProfileShell({ contextType, profile, intent, completeness }: Props) {
+  const router = useRouter();
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+  const [deleteConfirmText, setDeleteConfirmText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  async function handleLogout() {
+    setIsLoggingOut(true);
+    await signOut({ callbackUrl: "/" });
+  }
+
+  async function handleDeleteAccount() {
+    if (deleteConfirmText !== "delete my account") return;
+    setIsDeleting(true);
+    try {
+      const res = await fetch("/api/account", { method: "DELETE" });
+      if (res.ok) {
+        router.push("/");
+      } else {
+        setIsDeleting(false);
+      }
+    } catch {
+      setIsDeleting(false);
+    }
+  }
+
   // Get relevant intent fields for this context
   const intentLabels = intentFieldLabels[contextType] || {};
 
@@ -147,6 +176,62 @@ export function ProfileShell({ contextType, profile, intent, completeness }: Pro
       <p className="text-xs text-zinc-400 mt-4 text-center">
         Just chat naturally - we'll fill this in as we go
       </p>
+
+      {/* Account Actions */}
+      <div className="mt-6 pt-4 border-t border-zinc-100">
+        <p className="text-xs uppercase tracking-wide text-zinc-500 mb-3">
+          Account
+        </p>
+
+        <button
+          onClick={handleLogout}
+          disabled={isLoggingOut}
+          className="w-full rounded-lg border border-zinc-200 bg-white px-4 py-2.5 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50 disabled:opacity-50"
+        >
+          {isLoggingOut ? "Signing out..." : "Sign out"}
+        </button>
+
+        {!showDeleteConfirm ? (
+          <button
+            onClick={() => setShowDeleteConfirm(true)}
+            className="mt-2 w-full rounded-lg px-4 py-2.5 text-sm text-red-600 transition hover:bg-red-50"
+          >
+            Delete account
+          </button>
+        ) : (
+          <div className="mt-3 rounded-lg border border-red-200 bg-red-50 p-3">
+            <p className="text-xs text-red-700 mb-2">
+              This will permanently delete your profile and chat history.
+              Type <span className="font-mono font-medium">delete my account</span> to confirm.
+            </p>
+            <input
+              type="text"
+              value={deleteConfirmText}
+              onChange={(e) => setDeleteConfirmText(e.target.value)}
+              placeholder="delete my account"
+              className="w-full rounded-md border border-red-200 bg-white px-3 py-2 text-sm text-zinc-900 outline-none focus:border-red-300"
+            />
+            <div className="flex gap-2 mt-2">
+              <button
+                onClick={handleDeleteAccount}
+                disabled={deleteConfirmText !== "delete my account" || isDeleting}
+                className="flex-1 rounded-md bg-red-600 px-3 py-2 text-sm font-medium text-white transition hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {isDeleting ? "Deleting..." : "Delete"}
+              </button>
+              <button
+                onClick={() => {
+                  setShowDeleteConfirm(false);
+                  setDeleteConfirmText("");
+                }}
+                className="flex-1 rounded-md border border-zinc-200 bg-white px-3 py-2 text-sm font-medium text-zinc-700 transition hover:bg-zinc-50"
+              >
+                Cancel
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

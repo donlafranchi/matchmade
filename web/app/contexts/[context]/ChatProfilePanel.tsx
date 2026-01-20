@@ -129,31 +129,31 @@ export default function ChatProfilePanel({
             {/* Welcome message */}
             <div className="flex justify-start">
               <div className="max-w-[85%] rounded-2xl bg-zinc-200 px-4 py-2 text-sm text-zinc-800">
-                Hey! I&apos;m here to help you figure out what you&apos;re looking for. Unlike other apps that have you swiping endlessly, we focus on values and compatibility first - physical chemistry is something you discover in person. If you&apos;re curious about how this works or why we do things differently, just ask. Otherwise, tell me what brings you here.
+                Hey! I&apos;m here to help you build out your profile. The more I learn about you - what you enjoy, what matters to you, what you&apos;re looking for - the better I can introduce you to people who actually align with your values and interests. No pressure, just a conversation. What would you like to start with?
               </div>
             </div>
             {/* Starter prompts */}
             <div className="flex flex-wrap justify-end gap-2">
               <button
-                onClick={() => sendMessage("I'm looking for something serious")}
+                onClick={() => sendMessage("I can tell you a bit about myself")}
                 disabled={sending}
                 className="rounded-full bg-zinc-900 px-3 py-1.5 text-sm text-white transition hover:bg-zinc-800 disabled:opacity-50"
               >
-                Looking for something serious
+                Tell you about myself
               </button>
               <button
-                onClick={() => sendMessage("Just exploring, not sure what I want yet")}
+                onClick={() => sendMessage("What kind of things do you need to know?")}
                 disabled={sending}
                 className="rounded-full bg-zinc-900 px-3 py-1.5 text-sm text-white transition hover:bg-zinc-800 disabled:opacity-50"
               >
-                Just exploring
+                What do you need to know?
               </button>
               <button
-                onClick={() => sendMessage("How is this different from other dating apps?")}
+                onClick={() => sendMessage("How does this work?")}
                 disabled={sending}
                 className="rounded-full bg-zinc-900 px-3 py-1.5 text-sm text-white transition hover:bg-zinc-800 disabled:opacity-50"
               >
-                How is this different?
+                How does this work?
               </button>
             </div>
           </div>

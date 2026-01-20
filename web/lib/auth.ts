@@ -1,37 +1,93 @@
-import { cookies } from "next/headers";
+import { PrismaAdapter } from "@auth/prisma-adapter";
+import type { NextAuthOptions } from "next-auth";
+import { getServerSession } from "next-auth";
+import GoogleProvider from "next-auth/providers/google";
+import AppleProvider from "next-auth/providers/apple";
+import EmailProvider from "next-auth/providers/email";
 import { redirect } from "next/navigation";
-import { createHmac } from "node:crypto";
 import { prisma } from "./prisma";
 
-const SESSION_COOKIE = "session";
-const SESSION_MAX_AGE = 60 * 60 * 24 * 30; // 30 days
-
-const authSecret = () => process.env.AUTH_SECRET || "dev-secret";
-
-function sign(value: string) {
-  return createHmac("sha256", authSecret()).update(value).digest("hex");
+// Extend session user type to include id
+declare module "next-auth" {
+  interface Session {
+    user: {
+      id: string;
+      name?: string | null;
+      email?: string | null;
+      image?: string | null;
+    };
+  }
 }
 
-function encodeSession(userId: string) {
-  const signature = sign(userId);
-  return `${userId}.${signature}`;
+// Build providers list based on available credentials
+const providers: NextAuthOptions["providers"] = [];
+
+if (process.env.GOOGLE_CLIENT_ID && process.env.GOOGLE_CLIENT_SECRET) {
+  providers.push(
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+    })
+  );
 }
 
-function decodeSession(token: string) {
-  const [userId, signature] = token.split(".");
-  if (!userId || !signature) return null;
-  if (sign(userId) !== signature) return null;
-  return userId;
+if (process.env.APPLE_CLIENT_ID && process.env.APPLE_CLIENT_SECRET) {
+  providers.push(
+    AppleProvider({
+      clientId: process.env.APPLE_CLIENT_ID,
+      clientSecret: process.env.APPLE_CLIENT_SECRET,
+    })
+  );
+}
+
+if (process.env.RESEND_API_KEY) {
+  providers.push(
+    EmailProvider({
+      server: {
+        host: "smtp.resend.com",
+        port: 465,
+        auth: {
+          user: "resend",
+          pass: process.env.RESEND_API_KEY,
+        },
+      },
+      from: process.env.EMAIL_FROM ?? "noreply@example.com",
+    })
+  );
+}
+
+export const authOptions: NextAuthOptions = {
+  adapter: PrismaAdapter(prisma) as NextAuthOptions["adapter"],
+  providers,
+  pages: {
+    signIn: "/",
+    verifyRequest: "/auth/verify",
+    error: "/auth/error",
+  },
+  session: {
+    strategy: "database",
+    maxAge: 30 * 24 * 60 * 60, // 30 days
+  },
+  callbacks: {
+    session({ session, user }) {
+      if (session.user) {
+        session.user.id = user.id;
+      }
+      return session;
+    },
+  },
+};
+
+export async function auth() {
+  return getServerSession(authOptions);
 }
 
 export async function getSessionUser() {
-  const cookieStore = await cookies();
-  const cookie = cookieStore.get(SESSION_COOKIE);
-  const userId = cookie?.value ? decodeSession(cookie.value) : null;
-  if (!userId) return null;
+  const session = await auth();
+  if (!session?.user?.id) return null;
 
   return prisma.user.findUnique({
-    where: { id: userId },
+    where: { id: session.user.id },
     include: { contextProfiles: true },
   });
 }
@@ -40,21 +96,4 @@ export async function requireSessionUser() {
   const user = await getSessionUser();
   if (!user) redirect("/");
   return user;
-}
-
-export async function setSessionCookie(userId: string) {
-  const token = encodeSession(userId);
-  const cookieStore = await cookies();
-  cookieStore.set(SESSION_COOKIE, token, {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    maxAge: SESSION_MAX_AGE,
-    path: "/",
-  });
-}
-
-export async function clearSessionCookie() {
-  const cookieStore = await cookies();
-  cookieStore.delete(SESSION_COOKIE);
 }
