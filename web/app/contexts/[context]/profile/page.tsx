@@ -4,8 +4,7 @@ import { requireSessionUser } from "@/lib/auth";
 import { RelationshipContextType, prisma } from "@/lib/prisma";
 import { getSharedProfileDto } from "@/lib/profile-shared";
 import { getContextIntentDto } from "@/lib/context-intent";
-import ChatProfilePanel from "./ChatProfilePanel";
-import type { ChatMessage } from "@/lib/types";
+import { ProfileShell } from "@/app/components/ProfileShell";
 
 function isContextType(value: string): value is RelationshipContextType {
   return ["romantic", "friendship", "professional", "creative", "service"].includes(
@@ -13,7 +12,7 @@ function isContextType(value: string): value is RelationshipContextType {
   );
 }
 
-export default async function ContextPage({
+export default async function ProfilePage({
   params,
 }: {
   params: Promise<{ context: string }>;
@@ -29,7 +28,6 @@ export default async function ContextPage({
     where: {
       userId_contextType: { userId: user.id, contextType: context },
     },
-    include: { chatMessages: { orderBy: { createdAt: "asc" } } },
   });
 
   if (!contextProfile) {
@@ -42,26 +40,21 @@ export default async function ContextPage({
     getContextIntentDto(user.id, context),
   ]);
 
-  // Transform messages for client component
-  const messages: ChatMessage[] = contextProfile.chatMessages.map((msg) => ({
-    id: msg.id,
-    role: msg.role as "user" | "assistant" | "system",
-    content: msg.content,
-    offRecord: msg.offRecord,
-    createdAt: msg.createdAt.toISOString(),
-  }));
+  // Calculate combined completeness
+  const combinedCompleteness = Math.round(
+    (sharedProfile.completeness + contextIntent.completeness) / 2
+  );
 
   return (
     <div className="flex min-h-screen flex-col bg-zinc-50 text-zinc-900">
       {/* Main Content */}
       <main className="flex-1 px-4 pb-20 pt-6">
         <div className="mx-auto max-w-2xl">
-          <ChatProfilePanel
+          <ProfileShell
             contextType={context}
-            tonePreference={contextProfile.tonePreference}
-            initialMessages={messages}
-            sharedProfile={sharedProfile}
-            contextIntent={contextIntent}
+            profile={sharedProfile.profile}
+            intent={contextIntent.intent}
+            completeness={combinedCompleteness}
           />
         </div>
       </main>
@@ -71,21 +64,21 @@ export default async function ContextPage({
         <div className="flex w-full">
           <Link
             href={`/contexts/${context}`}
-            className="flex flex-1 flex-col items-center gap-1 py-3 text-zinc-900"
+            className="flex flex-1 flex-col items-center gap-1 py-3 text-zinc-400"
           >
             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
             </svg>
-            <span className="text-xs font-medium">Chat</span>
+            <span className="text-xs">Chat</span>
           </Link>
           <Link
             href={`/contexts/${context}/profile`}
-            className="flex flex-1 flex-col items-center gap-1 py-3 text-zinc-400"
+            className="flex flex-1 flex-col items-center gap-1 py-3 text-zinc-900"
           >
             <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
             </svg>
-            <span className="text-xs">Profile</span>
+            <span className="text-xs font-medium">Profile</span>
           </Link>
           <Link
             href="#"
