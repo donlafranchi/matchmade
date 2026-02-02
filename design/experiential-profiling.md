@@ -123,6 +123,172 @@ Some users will surprise us with perspectives we didn't anticipate. That's valua
 
 ---
 
+# High-Signal Questions
+
+Some questions reveal more about compatibility than others. These are candidates for the "essential few" that might predict relationship success:
+
+## The Hypothesis
+
+A small subset of questions may be disproportionately predictive. We should track which questions correlate with:
+- Mutual "see again" after dates
+- Relationship duration
+- User-reported satisfaction
+
+## Candidate High-Signal Questions
+
+### Growth & Respect
+**"Has a partner ever helped you change your mind on something you believed?"**
+- Reveals: Openness to growth, respect for partner's perspective, intellectual humility
+- Why it matters: Shows they can be influenced by someone they love without feeling threatened
+- Red flag if: "No one's ever changed my mind" or "I don't let people influence me"
+
+**"What's something about yourself you've worked on changing?"**
+- Reveals: Self-awareness, growth orientation, humility
+- Why it matters: People who've done inner work tend to be better partners
+
+### Conflict & Repair
+**"Tell me about a disagreement that ended well. What made it work?"**
+- Reveals: Conflict style, repair ability, emotional maturity
+- Why it matters: All couples fight; repair ability predicts longevity
+
+**"What happens in arguments that makes things worse?"**
+- Reveals: Self-awareness about triggers, what they need to avoid
+
+### Trust & Security
+**"What does trust look like to you?"** + **"What does mistrust feel like?"**
+- Reveals: Trust style AND what breaks it
+- Why it matters: Mismatched trust languages cause invisible friction
+
+### Independence & Togetherness
+**"What does healthy space look like in a relationship?"**
+- Reveals: Independence needs, attachment patterns
+- Why it matters: Mismatch here causes "suffocating" vs "abandoned" feelings
+
+### Support Style
+**"What do you need when things get hard?"** + **"What doesn't help, even when people mean well?"**
+- Reveals: How to support them, what to avoid
+- Why it matters: Partners who know how to support each other last longer
+
+---
+
+# Question Library (By Dimension)
+
+Full set of questions organized by what they reveal. Draw from these as needed.
+
+## Lifestyle Questions
+
+### Schedule & Rhythm
+
+**"When do you feel most yourself - early morning or late at night?"**
+- Follow-up: "What does that time of day give you that other times don't?"
+- Position: Morning (+2) ↔ Night (-2)
+
+**"What does a typical workday look like for you?"**
+- Position: Structured (+2) ↔ Irregular (-2)
+
+### Energy & Activity
+
+**"Describe your ideal weekend. What would recharge you vs drain you?"**
+- Follow-up: "What happens when you have nothing planned?"
+- Position: High energy (+2) ↔ Restorative (-2)
+
+**"If you had a free evening with no obligations, where would we find you?"**
+- Position: Out (+2) ↔ Home (-2)
+
+### Social Style
+
+**"After a long week, do you want to see people or be alone?"**
+- Position: Energized by people (+2) ↔ Need solitude (-2)
+
+**"What's your ideal social situation - big party, small dinner, or one-on-one?"**
+- Position: Large groups (+2) ↔ One-on-one (-2)
+
+### Spontaneity
+
+**"How do you feel when plans change at the last minute?"**
+- Follow-up: "What's your relationship with calendars?"
+- Position: Loves surprises (+2) ↔ Needs plans (-2)
+
+### Location
+
+**"How rooted are you to where you live? What would it take for you to move?"**
+- Position: Settled (+2) ↔ Seeking change (-2)
+
+---
+
+## Values Questions
+
+### Trust
+
+**"What does trust look like in a relationship? How do you know when it's there?"**
+- Opposite: "What does mistrust feel like? What makes you lose trust?"
+- Categories: Consistency / Honesty / Autonomy / Presence
+
+### Communication
+
+**"What's a conversation you've had that really stuck with you? What made it good?"**
+- Opposite: "What's a conversation style that doesn't work for you?"
+- Position: Deep (+2) ↔ Light (-2)
+
+### Conflict
+
+**"Tell me about a disagreement that ended well. What made it work?"**
+- Opposite: "What happens in arguments that makes things worse?"
+- Position: Talk immediately (+2) ↔ Need space (-2)
+
+### Independence
+
+**"What does healthy space look like in a relationship?"**
+- Opposite: "What does too much togetherness feel like? Or too much distance?"
+- Position: High independence (+2) ↔ Very connected (-2)
+
+### Growth
+
+**"What's something about yourself you've worked on changing?"**
+- Follow-up: "How do you feel when a partner wants you to change something?"
+- Position: Always improving (+2) ↔ Take me as I am (-2)
+
+**"Has a partner ever helped you change your mind on something you believed?"**
+- Reveals: Openness, respect, intellectual humility
+- Position: Open to influence (+2) ↔ Resistant (-2)
+
+### Career
+
+**"Where does work fit in your life? How important is career ambition to you?"**
+- Position: Career-focused (+2) ↔ Life over career (-2)
+
+### Beliefs
+
+**"How important is it that a partner shares your political views? What about religion?"**
+- Not about position, about importance (0-3)
+
+---
+
+## Psychology Questions (Optional)
+
+### Attachment
+
+**"How do you feel when a partner needs space? What about when they want more closeness?"**
+- Follow-up: "What do you need when you're feeling disconnected?"
+- Categories: Secure / Anxious / Avoidant / Disorganized
+
+### Emotional Expression
+
+**"When something's bothering you, how does it come out?"**
+- Position: Very expressive (+2) ↔ Reserved (-2)
+
+### Security & Reassurance
+
+**"What makes you feel secure in a relationship? What does reassurance look like for you?"**
+- Categories: Low need / Moderate / High need
+
+### Novelty vs Stability
+
+**"Do you prefer the comfort of routine or the excitement of something new?"**
+- Position: Craves novelty (+2) ↔ Prefers stability (-2)
+
+---
+
 # Dimension Reference (Scoring Guide)
 
 These are the dimensions we're measuring. The core questions above feed into multiple dimensions. This reference helps map responses to scores.
