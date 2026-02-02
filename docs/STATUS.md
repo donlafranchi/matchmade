@@ -1,0 +1,87 @@
+# STATUS.md
+
+> Updated by agents after each session.
+
+## Contents
+
+- [Current Phase](#current-phase)
+- [Recently Completed](#recently-completed)
+- [In Progress](#in-progress)
+- [Next Up](#next-up)
+- [Blockers](#blockers)
+
+---
+
+## Current Phase
+
+Phase 3 - Self-Hosted Agents
+
+---
+
+## Recently Completed
+
+### 2026-01-24
+- **Project Scaffolding** - Created CLAUDE.md, docs/PRODUCT.md, docs/ROADMAP.md, docs/STATUS.md, docs/DECISIONS.md, design/ folder, ticket template
+
+### 2026-01-21
+- **Waitlist System** - Basic waitlist signup implemented
+
+### 2026-01-19
+- **Phase 3.4 Complete** - Live profile extraction, chat agent, LLM client, frontend integration
+- Built multi-provider LLM client (Anthropic + Ollama)
+- Created chat agent with adaptive persona
+- Implemented profile extraction (runs every 5 messages)
+- Added profile shell UI showing what we're learning
+- Simplified onboarding flow and messaging
+- Created debug view at `/debug`
+
+### 2026-01-16
+- **Documentation Simplification** - Created docs/ with VISION, FEATURES, VERSIONS
+
+---
+
+## In Progress
+
+*None*
+
+---
+
+## Next Up
+
+1. [ ] Phase 3.5: Local Testing (verify full flow)
+2. [ ] Phase 3.6: VPS Setup with vLLM
+3. [ ] Phase 3.7: Vercel Deployment
+4. [ ] Phase 3.8: Beta User Testing
+
+---
+
+## Blockers
+
+*None*
+
+---
+
+## Key URLs (Local Dev)
+
+| Page | URL |
+|------|-----|
+| Login | http://localhost:3000 |
+| Onboarding | http://localhost:3000/onboarding |
+| Chat | http://localhost:3000/contexts/romantic |
+| Debug | http://localhost:3000/debug |
+
+---
+
+## Key Files
+
+| Purpose | Location |
+|---------|----------|
+| LLM Client | `web/lib/llm-client.ts` |
+| Chat Agent | `web/lib/agents/chat-agent.ts` |
+| Extraction Agent | `web/lib/agents/extraction-agent.ts` |
+| Chat API | `web/app/api/chat/route.ts` |
+| Debug View | `web/app/debug/page.tsx` |
+| Decisions | `docs/DECISIONS.md` |
+
+---
+*Last updated: 2026-01-24*
