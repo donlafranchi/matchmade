@@ -10,6 +10,28 @@ We don't ask people to describe themselves. We ask about their experiences.
 
 Everyone says they value trust, honesty, and communication. But these words mean different things to different people. By asking "What does trust look like to you?" instead of "Do you value trust?" we reveal what actually matters.
 
+**Key principles:**
+- Small set of high-quality questions, not exhaustive surveys
+- Let users describe things in their own words
+- Always offer: "Is there another way you think about this?"
+- How someone answers is itself a matching signal
+
+---
+
+## Communication Style as Signal
+
+How someone responds tells us as much as what they say:
+
+| Response Style | What It Suggests | Match With |
+|----------------|------------------|------------|
+| Long, detailed, reflective | Deep processor, values thoroughness | Similar or appreciates depth |
+| Short, direct, action-oriented | Efficient, gets to the point | Similar or balances with depth |
+| Playful, uses humor | Light touch, doesn't take self too seriously | Similar energy |
+| Asks clarifying questions | Thoughtful, wants to get it right | Appreciates intentionality |
+| Skips or "I don't know" | May not prioritize this, or still figuring out | Flexible partners |
+
+We should be transparent: "How you answer helps us understand how you communicate."
+
 ---
 
 ## Scoring Model
@@ -48,369 +70,100 @@ interface DimensionScore {
 
 ---
 
-# Layer 1: Lifestyle Questions
+# Core Questions (Small, High-Quality Set)
 
-## Schedule & Rhythm
+We don't need dozens of questions. We need a few good ones that open conversation.
 
-### Morning vs Night
+## The Essential Five (Onboarding)
 
-**Question:** "When do you feel most yourself - early morning or late at night?"
+These get us enough to start matching:
 
-**Follow-up:** "What does that time of day give you that other times don't?"
+1. **"What does your ideal weekend look like?"**
+   - Reveals: Energy, social style, activity preference
+   - Follow-up: "Is there another way you'd describe how you like to spend your time?"
 
-| Response Pattern | Position | Notes |
-|------------------|----------|-------|
-| Morning person, early riser | +2 | "I love the quiet before anyone's awake" |
-| Leans morning | +1 | "I'm better in the morning but can adapt" |
-| Flexible/no preference | 0 | "Depends on the day" |
-| Leans night | -1 | "I come alive after dinner" |
-| Night owl | -2 | "My best ideas come at 2am" |
+2. **"What are you looking for right now?"**
+   - Reveals: Intent, timeline, openness
+   - Direct ask is fine here
 
-**Compatibility:** Similarity preferred. Opposite schedules create friction.
+3. **"What does trust look like to you?"**
+   - Reveals: Trust style, what they're sensitive to
+   - Follow-up: "What does it feel like when trust is broken?"
 
----
+4. **"How do you feel when plans change last minute?"**
+   - Reveals: Spontaneity, flexibility, need for structure
+   - Follow-up: "Is that something you've always felt, or has it changed?"
 
-### Work Style
-
-**Question:** "What does a typical workday look like for you? How do you feel about that rhythm?"
-
-| Response Pattern | Position | Notes |
-|------------------|----------|-------|
-| Structured 9-5 | +2 | Values predictability |
-| Mostly structured | +1 | Regular but some flexibility |
-| Hybrid/varies | 0 | Mix of structure and freedom |
-| Flexible hours | -1 | Works when inspired |
-| Irregular/non-traditional | -2 | Gig work, creative, shifts |
-
-**Compatibility:** Similar rhythms help. Opposite can work if both are flexible.
+5. **"What do you need when things get hard?"**
+   - Reveals: Support style, communication needs, independence
+   - Follow-up: "What doesn't help, even when people mean well?"
 
 ---
 
-## Energy & Activity
+## Deepening Questions (Drip Over Time)
 
-### Energy Level
+One per day, optional, after onboarding:
 
-**Question:** "Describe your ideal weekend. What would recharge you vs drain you?"
-
-**Follow-up:** "What happens when you have nothing planned?"
-
-| Response Pattern | Position | Notes |
-|------------------|----------|-------|
-| High energy, always moving | +2 | "I'd go crazy with nothing to do" |
-| Active but with downtime | +1 | "Morning hike, then chill" |
-| Balanced | 0 | "Mix of activity and rest" |
-| Lower key, selective activity | -1 | "One outing, then home" |
-| Homebody, restorative | -2 | "Nothing planned IS the plan" |
-
-**Compatibility:** Within 1-2 points works. Opposite energy creates resentment.
+- **"What's a conversation you've had that really stuck with you?"** (communication depth)
+- **"What does healthy space look like in a relationship?"** (independence vs togetherness)
+- **"Tell me about a disagreement that ended well."** (conflict style)
+- **"How do you feel about where work fits in your life?"** (career priority)
+- **"What's something about yourself you've worked on changing?"** (growth orientation)
 
 ---
 
-### Activity Preference
+## Always Offer an Out
 
-**Question:** "If you had a free evening with no obligations, where would we find you?"
+After any question:
+- "Is there another way you think about this?"
+- "Feel free to describe it differently"
+- "Skip if this doesn't resonate"
 
-| Response Pattern | Position | Notes |
-|------------------|----------|-------|
-| Out - events, bars, activities | +2 | "Probably at a show or trying a new restaurant" |
-| Mostly out, sometimes home | +1 | "Out with friends, but I need my couch time" |
-| Equal mix | 0 | "Depends on my mood" |
-| Mostly home, selective outings | -1 | "Home, unless something really good is happening" |
-| Home - reading, cooking, projects | -2 | "On my couch, 100%" |
-
-**Compatibility:** Similarity preferred. Homebody + always out is friction.
+Some users will surprise us with perspectives we didn't anticipate. That's valuable data too.
 
 ---
 
-## Social Style
-
-### Introvert/Extrovert
-
-**Question:** "After a long week, do you want to see people or be alone? What does that feel like?"
-
-| Response Pattern | Position | Notes |
-|------------------|----------|-------|
-| Energized by people | +2 | "I need to be around others to recharge" |
-| Socially inclined | +1 | "People help, but I need some alone time" |
-| Ambivert | 0 | "Depends - sometimes people, sometimes solitude" |
-| Needs solitude to recharge | -1 | "People are great but drain me" |
-| Strong introvert | -2 | "Alone time is essential" |
-
-**Compatibility:** Ambivert pairs well with both. Strong opposites can struggle.
-
----
-
-### Group Size Preference
-
-**Question:** "What's your ideal social situation? Big party, small dinner, or one-on-one?"
-
-| Response Pattern | Position | Notes |
-|------------------|----------|-------|
-| Large groups, parties | +2 | "The more the merrier" |
-| Medium groups | +1 | "Dinner party with 6-8 people" |
-| Flexible | 0 | "Depends on the people" |
-| Small groups | -1 | "3-4 close friends" |
-| One-on-one only | -2 | "I connect best individually" |
-
-**Compatibility:** Similar preferences reduce social friction.
-
----
-
-## Planning Style
-
-### Spontaneity
-
-**Question:** "How do you feel when plans change at the last minute? Tell me about a time that happened."
-
-**Follow-up:** "What's your relationship with calendars and to-do lists?"
-
-| Response Pattern | Position | Notes |
-|------------------|----------|-------|
-| Loves surprises, hates plans | +2 | "Plans are just suggestions" |
-| Flexible, goes with flow | +1 | "I adapt easily" |
-| Balanced | 0 | "Some structure, some spontaneity" |
-| Prefers knowing the plan | -1 | "I like to know what's coming" |
-| Strong planner | -2 | "Changed plans stress me out" |
-
-**Compatibility:** Flexible (0) pairs well with either. Strong opposites create friction.
-
----
-
-## Location
-
-### Location Flexibility
-
-**Question:** "How rooted are you to where you live? What would it take for you to move?"
-
-| Response Pattern | Position | Notes |
-|------------------|----------|-------|
-| Settled, not moving | +2 | "This is home, period" |
-| Prefer to stay | +1 | "Open to it but not seeking" |
-| Flexible | 0 | "Right opportunity, right person" |
-| Open to relocating | -1 | "I'd move for the right situation" |
-| Actively seeking change | -2 | "I want to be somewhere else" |
-
-**Compatibility:** Must be compatible for relationship to work long-term.
-
----
-
-# Layer 2: Values Questions
-
-## Trust
-
-**Question:** "What does trust look like in a relationship? How do you know when it's there?"
-
-**Opposite:** "What does mistrust feel like? What makes you lose trust?"
-
-| Response Pattern | Position | Spectrum |
-|------------------|----------|----------|
-| Actions over words | "consistency" | Trust = reliability |
-| Transparency, openness | "honesty" | Trust = no secrets |
-| Space without suspicion | "autonomy" | Trust = freedom |
-| Being there when hard | "presence" | Trust = support |
-
-**Compatibility:** Same trust language = easier. Different can work if understood.
-
----
-
-## Communication
-
-**Question:** "What's a conversation you've had that really stuck with you? What made it good?"
-
-**Opposite:** "What's a conversation style that doesn't work for you?"
-
-| Response Pattern | Position | Notes |
-|------------------|----------|-------|
-| Deep, philosophical | +2 | Values intellectual connection |
-| Meaningful but not heavy | +1 | Substance with lightness |
-| Varies by mood/topic | 0 | Flexible communicator |
-| Light, playful | -1 | Values ease over depth |
-| Action over talk | -2 | "Talk is cheap" |
-
-**Compatibility:** Similar depth preferences reduce "we never talk about anything real" vs "everything is so heavy" conflicts.
-
----
-
-## Conflict Style
-
-**Question:** "Tell me about a disagreement that ended well. What made it work?"
-
-**Opposite:** "What happens in arguments that makes things worse?"
-
-| Response Pattern | Position | Notes |
-|------------------|----------|-------|
-| Talk it through immediately | +2 | "Let's hash it out now" |
-| Discuss when calm | +1 | "Give me an hour, then let's talk" |
-| Depends on the issue | 0 | Adaptable |
-| Need space first | -1 | "I need to process alone" |
-| Avoid/smooth over | -2 | "I'd rather let it go" |
-
-**Compatibility:** Must be compatible - pursuer + withdrawer is classic trap.
-
----
-
-## Independence vs Togetherness
-
-**Question:** "What does healthy space look like in a relationship?"
-
-**Opposite:** "What does too much togetherness feel like? Or too much distance?"
-
-| Response Pattern | Position | Spectrum |
-|------------------|----------|----------|
-| Lots of independence | +2 | "We should have separate lives that overlap" |
-| Value alone time | +1 | "I need my own friends and hobbies" |
-| Balanced | 0 | "Mix of together and apart" |
-| Prefer togetherness | -1 | "I want to share most things" |
-| Very connected | -2 | "Best friends who do everything together" |
-
-**Compatibility:** Within 1-2 points. Opposite ends feel suffocating or abandoned.
-
----
-
-## Growth & Change
-
-**Question:** "What's something about yourself you've worked on changing? How did that go?"
-
-**Follow-up:** "How do you feel when a partner wants you to change something?"
-
-| Response Pattern | Position | Notes |
-|------------------|----------|-------|
-| Always improving | +2 | Growth-oriented, welcomes feedback |
-| Open to growth | +1 | Will work on things, not obsessive |
-| Selective | 0 | "Some things, not everything" |
-| Accepting of self | -1 | "I am who I am, mostly" |
-| Resistant to change | -2 | "Take me as I am" |
-
-**Compatibility:** Similar growth orientation prevents "you're never satisfied" vs "you never improve" conflicts.
-
----
-
-## Relationship Intent (Direct Ask)
-
-**Question:** "What are you looking for right now? And how do you feel about timelines?"
-
-| Response | Code | Notes |
-|----------|------|-------|
-| "Casual, nothing serious" | casual | No pressure |
-| "Open to something serious" | open | See where it goes |
-| "Looking for a relationship" | serious | Intentional dating |
-| "Want to find my person" | marriage_track | Long-term focused |
-| "Honestly not sure" | figuring_it_out | Exploring |
-
-**Compatibility:** Must align. Casual + marriage_track is a mismatch.
-
----
-
-## Children (Direct Ask)
-
-**Question:** "How do you feel about kids - having them, not having them?"
-
-| Response | Code | Notes |
-|----------|------|-------|
-| "Definitely want kids" | want | Dealbreaker if partner doesn't |
-| "Open to it" | open | Flexible |
-| "Don't want kids" | no | Dealbreaker if partner does |
-| "Already have kids" | have_kids | Different considerations |
-
-**Compatibility:** Dealbreaker category. Want + No = no match.
-
----
-
-## Career Priority
-
-**Question:** "Where does work fit in your life? How important is career ambition to you?"
-
-| Response Pattern | Position | Notes |
-|------------------|----------|-------|
-| Career-focused | +2 | "Work is a huge part of my identity" |
-| Ambitious but balanced | +1 | "Career matters but not everything" |
-| Balanced | 0 | "Work to live, not live to work" |
-| Life over career | -1 | "Career is fine, life is better" |
-| Minimal career focus | -2 | "Work is just money" |
-
-**Compatibility:** Similar priorities reduce resentment about time/focus.
-
----
-
-## Beliefs & Politics
-
-**Question:** "How important is it that a partner shares your political views? What about religion?"
-
-| Response | Importance | Notes |
-|----------|------------|-------|
-| "Doesn't matter at all" | 0 | Non-factor |
-| "Somewhat, but not critical" | 1 | Preference |
-| "Pretty important" | 2 | Strong preference |
-| "Dealbreaker" | 3 | Must align |
-
-**Note:** We ask about importance, not position. Position can be asked directly if importance > 0.
-
-**Compatibility:** If either person rates 2-3, positions must be compatible.
-
----
-
-# Layer 3: Psychology Questions (Optional)
-
-## Attachment Style
-
-**Question:** "How do you feel when a partner needs space? What about when they want more closeness?"
-
-**Follow-up:** "What do you need when you're feeling disconnected from someone?"
-
-| Response Pattern | Style | Notes |
-|------------------|-------|-------|
-| Comfortable with both | secure | "Space is fine, closeness is fine" |
-| Worry when they're distant | anxious | "I need to know we're okay" |
-| Relief when they back off | avoidant | "I need room to breathe" |
-| Both anxious and avoidant | disorganized | Push-pull patterns |
-
-**Compatibility:** Secure + any works. Anxious + avoidant is difficult.
-
----
-
-## Emotional Expression
-
-**Question:** "When something's bothering you, how does it come out? How do you know when someone else is upset?"
-
-| Response Pattern | Position | Notes |
-|------------------|----------|-------|
-| Very expressive | +2 | "You'll know how I feel" |
-| Open when comfortable | +1 | "I share with people I trust" |
-| Moderate | 0 | "Depends on the situation" |
-| Private | -1 | "I process internally" |
-| Reserved | -2 | "I keep things to myself" |
-
-**Compatibility:** Similar expressiveness or complementary (expressive + good listener).
-
----
-
-## Security & Reassurance
-
-**Question:** "What makes you feel secure in a relationship? What does reassurance look like for you?"
-
-| Response Pattern | Need Level | Notes |
-|------------------|------------|-------|
-| Very little needed | low | "I'm pretty self-assured" |
-| Occasional check-ins | moderate | "Nice to hear, not essential" |
-| Regular affirmation | high | "I need to know where I stand" |
-
-**Compatibility:** Must be compatible with partner's ability/willingness to provide.
-
----
-
-## Novelty vs Stability
-
-**Question:** "Do you prefer the comfort of routine or the excitement of something new?"
-
-| Response Pattern | Position | Notes |
-|------------------|----------|-------|
-| Craves novelty | +2 | "I get bored with routine" |
-| Likes variety | +1 | "Mix it up regularly" |
-| Balanced | 0 | "Some routine, some adventure" |
-| Prefers stability | -1 | "Routine is comforting" |
-| Strong stability | -2 | "I like knowing what to expect" |
-
-**Compatibility:** Moderate differences work (keeps things interesting). Extremes can clash.
+# Dimension Reference (Scoring Guide)
+
+These are the dimensions we're measuring. The core questions above feed into multiple dimensions. This reference helps map responses to scores.
+
+## Lifestyle Dimensions
+
+| Dimension | Spectrum | Compatibility Rule |
+|-----------|----------|-------------------|
+| Schedule | Morning ↔ Night | Similarity |
+| Energy | High ↔ Low | Similarity (within 2) |
+| Social | Extrovert ↔ Introvert | Compatibility |
+| Spontaneity | Spontaneous ↔ Planner | Complementary |
+| Location | Rooted ↔ Mobile | Compatibility |
+
+## Values Dimensions
+
+| Dimension | Spectrum | Compatibility Rule |
+|-----------|----------|-------------------|
+| Trust style | Consistency / Honesty / Autonomy / Presence | Similarity |
+| Communication depth | Deep ↔ Light | Similarity |
+| Conflict style | Engage ↔ Withdraw | Compatibility |
+| Independence | High ↔ Low | Compatibility (within 2) |
+| Growth | Growth-seeking ↔ Self-accepting | Similarity |
+| Career | Primary ↔ Secondary | Compatibility |
+
+## Direct Asks (Dealbreakers)
+
+| Dimension | Options | Compatibility Rule |
+|-----------|---------|-------------------|
+| Intent | casual / open / serious / marriage_track | Must align |
+| Children | want / open / no / have_kids | Dealbreaker |
+| Politics importance | 0-3 | If 2+, positions must align |
+| Religion importance | 0-3 | If 2+, positions must align |
+
+## Psychology (Optional)
+
+| Dimension | Options | Compatibility Rule |
+|-----------|---------|-------------------|
+| Attachment | secure / anxious / avoidant / disorganized | Compatibility |
+| Expression | Expressive ↔ Reserved | Compatibility |
+| Novelty | Novelty-seeking ↔ Stability-seeking | Complementary |
 
 ---
 
