@@ -15,6 +15,227 @@ Everyone says they value trust, honesty, and communication. But these words mean
 - Let users describe things in their own words
 - Always offer: "Is there another way you think about this?"
 - How someone answers is itself a matching signal
+- **Meet people where they are** — not everyone has relationship experience
+- **Help people learn about themselves**, not just report what they already know
+
+---
+
+## Designing for Inexperience
+
+Our questions assume self-awareness and relationship experience that many users don't have. A 19-year-old who's never been in a serious relationship can't meaningfully answer "What does trust look like to you?" — they're guessing or parroting.
+
+### What inexperienced users DON'T know
+
+| We Ask | What It Assumes |
+|--------|-----------------|
+| "What does trust look like?" | You've experienced trust being built or broken |
+| "How do you handle conflict?" | You've been in relationship conflicts |
+| "What do you need when things get hard?" | You know yourself under stress with a partner |
+| "What does healthy space look like?" | You've navigated independence in a relationship |
+
+### What inexperienced users DO know
+
+- What they like doing (concrete activities, hobbies)
+- What annoys them (immediate reactions)
+- Who they admire (models of who they want to be)
+- What feels fun vs. draining
+- Basic social preferences
+- What they think they want (even if it'll evolve)
+
+### Experience Levels
+
+Users fall roughly into three categories:
+
+| Level | Characteristics | Question Approach |
+|-------|-----------------|-------------------|
+| **New** | Few/no relationships, limited self-knowledge, may be anxious | Concrete scenarios, simple choices, normalize uncertainty |
+| **Learning** | Some experience, starting to notice patterns, forming preferences | Mix of concrete and reflective, validate their emerging insights |
+| **Experienced** | Multiple relationships, clearer self-knowledge, knows what works/doesn't | Deeper questions, nuance welcome, can articulate needs |
+
+**How to detect:** Ask directly during onboarding: "How much dating experience do you have?" with options like:
+- "I'm pretty new to this"
+- "I've dated some but still figuring things out"
+- "I have a good sense of what I'm looking for"
+
+This isn't about judging — it's about asking the right questions.
+
+---
+
+## Scenario-Based Questions (For Less Experienced Users)
+
+Instead of abstract questions requiring self-knowledge, present concrete scenarios that reveal the same dimensions.
+
+### Scenario Format
+
+```
+[Situation] → [How do you feel / What do you do?]
+```
+
+### Examples by Dimension
+
+**Trust** (instead of "What does trust look like?")
+- "Your partner is texting someone and smiling. What's your first thought?"
+- "You find out your partner told a small lie to avoid hurting your feelings. How do you feel?"
+
+**Conflict** (instead of "How do you handle disagreements?")
+- "You're upset about something your partner did. Do you bring it up right away, wait until you've calmed down, or hope it resolves itself?"
+- "In an argument, your partner says they need space. What goes through your head?"
+
+**Independence** (instead of "What does healthy space look like?")
+- "Your partner wants to spend Saturday with their friends instead of you. How do you feel?"
+- "You have a free evening. Your partner wants to hang out but you'd rather be alone. What do you do?"
+
+**Spontaneity** (instead of "How do you feel when plans change?")
+- "You had dinner plans but your partner suggests a spontaneous road trip instead. What's your reaction?"
+- "Your partner surprises you by showing up at your work. Is this sweet or uncomfortable?"
+
+**Support** (instead of "What do you need when things get hard?")
+- "You've had a terrible day. Your partner offers to talk about it. Do you want to vent, be distracted, or be alone?"
+- "You're stressed about something. Your partner tries to fix the problem. Is this helpful or frustrating?"
+
+### Why Scenarios Work Better
+
+1. **No experience required** — They imagine, not remember
+2. **Reveals intuitive response** — Less time to construct "good" answer
+3. **Concrete = honest** — Abstract questions invite idealized answers
+4. **Shows how they think** — Process of answering is data
+
+---
+
+## Graduated Depth
+
+Questions should deepen as users gain experience — both with dating generally and with our app specifically.
+
+### Onboarding (Everyone)
+
+Simple, concrete, low-pressure:
+
+1. "What do you like doing for fun?" (lifestyle basics)
+2. "What are you looking for?" (intent - direct choice)
+3. "After a long day, do you want company or alone time?" (social/energy)
+4. "Plans change last minute — are you relieved or annoyed?" (spontaneity)
+5. "How much dating experience do you have?" (calibrates future questions)
+
+### Week 1-2 (Scenario Questions)
+
+Based on their experience level, introduce scenarios:
+- New users: More scenarios, simpler choices
+- Experienced users: Can skip to reflective questions
+
+### After First Match
+
+Now they have context to reflect:
+- "What are you hoping happens with this match?"
+- "Anything you're nervous about?"
+
+### After First Date
+
+Real experience to learn from:
+- Feedback on the date (T006)
+- "What surprised you about meeting them?"
+- "Anything you noticed about yourself?"
+
+### After Multiple Dates
+
+Patterns emerge, can ask deeper:
+- "What's working in dates that go well?"
+- "What's a pattern you've noticed in what attracts you?"
+- Now the abstract questions make sense: "What does trust mean to you now?"
+
+---
+
+## Helping Young Men
+
+There's a crisis among young men: social isolation, toxic "advice" sources, fear of rejection, inability to read social cues. The app can help — not by lowering standards, but by building skills.
+
+### The Problems
+
+| Issue | How It Shows Up |
+|-------|-----------------|
+| **Social isolation** | Limited practice with real interaction |
+| **Toxic advice** | Red pill, pickup artists, transactional views of dating |
+| **Fear of rejection** | Avoidance, awkwardness, or overcorrection into aggression |
+| **Can't read cues** | Missing signals of interest or discomfort |
+| **Performance mode** | Trying to be impressive instead of genuine |
+| **Unrealistic expectations** | Porn, media, Instagram vs. real connection |
+
+### How the App Can Help
+
+**1. Normalize inexperience**
+- Let them say "I'm new to this" without shame
+- Match with patient partners or fellow beginners
+- Set realistic expectations for early dates
+
+**2. Model healthy communication**
+- The app's voice demonstrates what respectful interaction sounds like
+- Prompts that teach: "Here's one way to express that..."
+- Never manipulative framing — connection, not conquest
+
+**3. Low-pressure date structures**
+- Suggest activity-based first dates (walk, coffee, museum)
+- Time-bounded: "30-minute coffee" feels safer than "dinner"
+- Public, casual, easy to exit gracefully
+
+**4. Post-date coaching** (via feedback system)
+- "The conversation felt awkward? That's normal. Here's what can help..."
+- "You mentioned she seemed distant — here's how to check in without pressure"
+- Gentle correction without judgment
+
+**5. Celebrate effort, not outcomes**
+- "You showed up and tried — that's the hard part"
+- "Rejection isn't about your worth"
+- Progress is dates happening, not just matches converting
+
+**6. Counter toxic narratives**
+- Frame dating as mutual discovery, not winning/losing
+- Women are people with their own preferences, not puzzles to solve
+- Vulnerability is attractive, not weak
+
+### Questions That Help Young Men Develop
+
+Instead of asking what they know (they don't), ask questions that prompt growth:
+
+- "What kind of person do you want to be in a relationship?" (aspirational)
+- "Think of a couple you admire. What do you notice about how they treat each other?"
+- "What's something you're working on in yourself?" (growth orientation)
+- "What would you want a partner to know about you that most people don't see?"
+
+---
+
+## Helping Young Women
+
+Young women face different but related challenges.
+
+### The Problems
+
+| Issue | How It Shows Up |
+|-------|-----------------|
+| **Overwhelmed by attention** | Too many matches, hard to filter |
+| **Safety concerns** | Real fear of meeting strangers |
+| **Pressure to be nice** | Difficulty setting boundaries, saying no |
+| **Mixed signals about what they want** | Social pressure vs. actual desires |
+| **Performing femininity** | Being what they think men want |
+
+### How the App Can Help
+
+**1. Quality over quantity**
+- Fewer, better matches based on compatibility
+- Not a numbers game
+
+**2. Safety built in**
+- Activity-based, public first dates
+- Time-limited meetings
+- Easy ways to exit (future feature: check-in texts)
+
+**3. Encourage honesty about wants**
+- "It's okay to want something casual"
+- "It's okay to want something serious"
+- No judgment either way
+
+**4. Model boundary-setting**
+- "You can say no"
+- "You don't owe anyone a second date"
+- "Trust your gut"
 
 ---
 
@@ -76,7 +297,35 @@ We don't need dozens of questions. We need a few good ones that open conversatio
 
 ## The Essential Five (Onboarding)
 
-These get us enough to start matching:
+**Two tracks based on experience level:**
+
+### Track A: New to Dating
+
+Concrete, scenario-based, low pressure:
+
+1. **"What do you like doing for fun?"**
+   - Reveals: Energy, interests, lifestyle
+   - Simple, no wrong answer
+
+2. **"What are you looking for?"** (choice)
+   - Options: Something casual / Open to whatever / Something serious / Still figuring it out
+   - Direct ask, validates uncertainty
+
+3. **"After a long week, do you want to see people or be alone?"**
+   - Reveals: Social energy
+   - Binary makes it easy
+
+4. **"Plans change last minute — are you relieved or annoyed?"**
+   - Reveals: Spontaneity
+   - Concrete reaction, not abstract preference
+
+5. **"How much relationship experience do you have?"** (choice)
+   - Options: Pretty new to this / Some but still learning / I know what I'm looking for
+   - Calibrates future questions, normalizes inexperience
+
+### Track B: More Experienced
+
+These get us enough to start matching with depth:
 
 1. **"What does your ideal weekend look like?"**
    - Reveals: Energy, social style, activity preference
@@ -491,29 +740,79 @@ Something to know:
 
 # Progressive Questioning
 
-Don't ask everything at once.
+Don't ask everything at once. Questions should evolve as users gain experience.
 
 ## Onboarding (5 min)
-1. Location (direct)
-2. "What does your ideal weekend look like?" (energy + social)
-3. "What are you looking for right now?" (intent - direct)
-4. "What does trust look like to you?" (trust style)
-5. "How do you feel when plans change?" (spontaneity)
 
-## Week 1 (1 question/day)
-- Day 1: Communication style
-- Day 2: Independence vs togetherness
-- Day 3: Conflict style
-- Day 4: Growth orientation
-- Day 5: Career priority
+Based on experience level (see Track A / Track B above):
+
+**Everyone:**
+1. Location (direct)
+2. Basic info (age, photos)
+3. Experience level question
+
+**New users (Track A):**
+- Concrete scenario questions
+- Simple either/or choices
+- No pressure to have "figured it out"
+
+**Experienced users (Track B):**
+- Reflective questions
+- Follow-ups welcome
+- Nuance appreciated
+
+## Week 1-2 (Scenario Drip)
+
+**New users:** One scenario question per day
+- "Your date is running 20 min late and hasn't texted. What's your first thought?"
+- "You've been texting someone for a week. They suggest meeting up. How do you feel?"
+- "After a great first date, how soon do you want to hear from them?"
+
+**Experienced users:** One reflective question per day
+- Communication style
+- Independence vs togetherness
+- Conflict style
+- Growth orientation
+- Career priority
 
 ## After First Match
-- Attachment questions (optional, opt-in prompt)
-- Deeper values questions based on match feedback
+
+Context makes questions meaningful:
+- "What are you hoping happens?"
+- "Anything you're curious about them?"
+- "Anything you're nervous about?"
 
 ## After First Date
-- Feedback questions
-- Refinement: "Anything you've learned about what you want?"
+
+Real experience to learn from:
+
+**Feedback questions:**
+- How did it feel?
+- Would you see them again?
+- Anything stand out?
+
+**Learning questions:**
+- "What surprised you?"
+- "What did you notice about yourself?"
+- "Anything you'd do differently?"
+
+**For new users, add coaching:**
+- "First dates can feel awkward — that's totally normal"
+- "Here's what often helps the second time..."
+
+## After Multiple Dates
+
+Now abstract questions make sense:
+- "What's working in dates that go well?"
+- "What patterns do you notice in what attracts you?"
+- "What does trust mean to you now that you've experienced more?"
+
+## Ongoing (Monthly Check-in)
+
+As users gain experience:
+- "Has anything changed in what you're looking for?"
+- "What have you learned about yourself?"
+- Unlock deeper questions as formation scores increase
 
 ---
 
@@ -567,13 +866,59 @@ interface DimensionScore {
 
 ---
 
+# Matching Considerations for Inexperienced Users
+
+## The Sparse Data Problem
+
+New users have less data. This affects matching:
+
+| Situation | Approach |
+|-----------|----------|
+| Few dimensions scored | Match on what we have, lower confidence |
+| Low formation scores | Weight those dimensions less |
+| "I don't know" answers | Treat as neutral, not negative |
+| Scenario answers | Extract position even without reflection |
+
+## Matching New with Experienced
+
+Should a 19-year-old with no relationship experience match with a 28-year-old who knows exactly what they want?
+
+**Arguments for:**
+- Experienced partners can be patient teachers
+- Some people prefer partners who are "fresh"
+- Age isn't the same as experience
+
+**Arguments against:**
+- Power imbalance risk
+- Frustration when communication styles differ
+- Different life stages
+
+**Approach:** Let users indicate preference:
+- "I prefer someone at a similar experience level"
+- "Experience level doesn't matter to me"
+- "I'd prefer someone more experienced who can be patient"
+
+## First Date Suggestions
+
+For new/anxious users, the app can suggest lower-pressure formats:
+
+- **Activity-based:** Walking, coffee shop, museum
+- **Time-bounded:** "30-minute coffee" not "dinner"
+- **Public:** Easy to exit, feels safer
+- **Daytime:** Less romantic pressure
+
+---
+
 # Open Questions
 
-1. **NLP/LLM extraction:** How do we map free-text answers to position scores?
+1. ~~**NLP/LLM extraction:** How do we map free-text answers to position scores?~~ *(Addressed in T003)*
 2. **Gaming:** Can people figure out "good" answers? Does it matter?
-3. **Sparse data:** How do we match people with few answers?
+3. ~~**Sparse data:** How do we match people with few answers?~~ *(Addressed above — match on what we have, lower confidence)*
 4. **Position vs compatibility:** Some dimensions may need more nuanced compatibility rules
 5. **Importance weighting:** Should user-stated importance outweigh inferred?
+6. **Experience mismatch:** How do we handle large experience gaps?
+7. **Coaching efficacy:** Does post-date guidance actually help? How do we measure?
+8. **Scenario validity:** Do scenario responses predict actual behavior?
 
 ---
 
