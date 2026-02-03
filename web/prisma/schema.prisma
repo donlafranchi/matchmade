@@ -50,6 +50,10 @@ model User {
   profileDimensions ProfileDimension[]
   feedbackGiven     FeedbackResponse[] @relation("FeedbackGiven")
   feedbackReceived  FeedbackResponse[] @relation("FeedbackReceived")
+
+  // Experience tracking (T001 update)
+  experienceLevel      String?  // 'new' | 'learning' | 'experienced'
+  experiencePreference String?  // 'similar' | 'any' | 'more_experienced'
 }
 
 // Auth.js models
@@ -335,8 +339,9 @@ model ProfileDimension {
   importance Int      @default(0)  // 0-3 (how much it matters)
   dealbreaker Boolean @default(false)  // Hard pass - filter out incompatible
 
-  rawAnswer  String?  // Original text response
-  updatedAt  DateTime @updatedAt
+  rawAnswer    String?  // Original text response
+  questionType String?  // 'scenario' | 'reflective' | 'direct_choice'
+  updatedAt    DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 

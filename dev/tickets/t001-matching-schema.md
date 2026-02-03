@@ -33,14 +33,19 @@ model ProfileDimension {
   importance Int      @default(0)  // 0-3 (how much it matters)
   dealbreaker Boolean @default(false)  // Hard pass - filter out incompatible
 
-  rawAnswer  String?  // Original text response
-  updatedAt  DateTime @updatedAt
+  rawAnswer    String?  // Original text response
+  questionType String?  // 'scenario' | 'reflective' | 'direct_choice'
+  updatedAt    DateTime @updatedAt
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([userId, dimension])
   @@index([userId])
 }
+
+// On User model:
+experienceLevel      String?  // 'new' | 'learning' | 'experienced'
+experiencePreference String?  // 'similar' | 'any' | 'more_experienced'
 
 model FeedbackResponse {
   id         String   @id @default(cuid())
@@ -70,6 +75,10 @@ model FeedbackResponse {
 - FeedbackResponse uses `onDelete: RESTRICT` to prevent accidental data loss
 - Migration 1: 20260203004428_add_matching_dimensions
 - Migration 2: 20260203011119_add_dealbreaker_flag - added `dealbreaker` boolean for hard requirements
+- Migration 3: 20260203014658_add_experience_tracking - added experience fields for two-track onboarding:
+  - User: `experienceLevel` ('new' | 'learning' | 'experienced')
+  - User: `experiencePreference` ('similar' | 'any' | 'more_experienced')
+  - ProfileDimension: `questionType` ('scenario' | 'reflective' | 'direct_choice')
 
 ## Verification
 - [x] `npx prisma migrate dev` runs without errors

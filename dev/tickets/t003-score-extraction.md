@@ -119,17 +119,28 @@ export async function saveScores(
 - Lower temperature (0.3) for consistent scoring
 - `extractAndSaveScores` convenience function combines extraction + save
 
+**Update (experience-aware):**
+- Added `QuestionType` ('scenario' | 'reflective' | 'direct_choice')
+- `SCENARIO_PROMPT` - different extraction for concrete scenario answers
+- `REFLECTIVE_PROMPT` - original extraction for abstract questions
+- `mapDirectChoice()` - direct mapping for choice answers (no LLM)
+- `CHOICE_MAPPINGS` - predefined mappings for common questions
+- `saveDirectChoice()` - save choice answers directly
+- `questionType` parameter added to all extraction/save functions
+
 ## Verification
 - [x] Extraction returns valid scores for sample answers
 - [x] Handles empty/short answers gracefully (returns zero scores)
 - [x] Scores are saved to database correctly (upsert pattern)
 - [x] Updates existing scores on re-answer (via upsert)
+- [x] Scenario extraction uses different prompt
+- [x] Direct choice mapping works without LLM
 
 ## Completion
 
 **Date:** 2026-02-02
-**Summary:** Created score extraction module using LLM to analyze free-text answers
+**Summary:** Created score extraction module with support for scenario, reflective, and direct choice question types
 **Files changed:**
-- web/lib/matching/extract-score.ts (new)
+- web/lib/matching/extract-score.ts (new, then updated)
 **Tests:** N/A (no test script configured)
 **Notes:** Requires `npx prisma generate` after schema changes to update client types
