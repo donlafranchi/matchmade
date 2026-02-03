@@ -1,4 +1,4 @@
-# T007 - Match Pool Display
+# T008 - Match Pool Display
 
 ## Goal
 Show users their compatible matches as a **match pool** — people they *could* meet, not individual "matches."
@@ -80,7 +80,7 @@ Information scarcity forces genuine discovery in person.
 ## Dependencies
 
 - T004 Compatibility Calculation (done)
-- Photo upload (backlog/photo-upload.md — needed before this)
+- T007 Photo Upload (needed before this)
 
 ## Plan
 

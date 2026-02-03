@@ -12,11 +12,12 @@ Unprioritized queue of features to build. Not a commitment — a parking lot.
 ### Core Flow (Build Order)
 These enable the primary user journey:
 
-1. **photo-upload.md** — Photos for two-stage filter (character → attraction)
-2. **interaction-flow.md** — Nudge → Wink → Crush Note → Accept (no DMs)
-3. **events.md** — Group events as primary meeting mode
-4. **ice-breakers.md** — Agent-generated conversation starters
-5. **reputation-system.md** — No-show tracking, timeouts, trust scores
+1. **interaction-flow.md** — Nudge → Wink → Crush Note → Accept (no DMs)
+2. **events.md** — Group events as primary meeting mode
+3. **ice-breakers.md** — Agent-generated conversation starters
+4. **reputation-system.md** — No-show tracking, timeouts, trust scores
+
+*Note: Photo upload moved to tickets/t007-photo-upload.md*
 
 ### Infrastructure
 - **deployment.md** — Deploy to Vercel for beta users
