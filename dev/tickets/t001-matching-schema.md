@@ -4,10 +4,10 @@
 Add database tables for profile dimensions and post-date feedback.
 
 ## Acceptance Criteria
-- [ ] ProfileDimension model with formation/position/importance fields
-- [ ] FeedbackResponse model for post-date feedback
-- [ ] Migration runs successfully
-- [ ] Relations to User model work correctly
+- [x] ProfileDimension model with formation/position/importance fields
+- [x] FeedbackResponse model for post-date feedback
+- [x] Migration runs successfully
+- [x] Relations to User model work correctly
 
 ## Constraints
 - Must work with existing User model
@@ -64,17 +64,22 @@ model FeedbackResponse {
 ---
 
 ## Implementation Notes
-*Added during implementation*
+- Added User relations: `profileDimensions`, `feedbackGiven` (named relation), `feedbackReceived` (named relation)
+- ProfileDimension uses `onDelete: Cascade` to clean up when user is deleted
+- FeedbackResponse uses `onDelete: RESTRICT` to prevent accidental data loss
+- Migration: 20260203004428_add_matching_dimensions
 
 ## Verification
-- [ ] `npx prisma migrate dev` runs without errors
+- [x] `npx prisma migrate dev` runs without errors
 - [ ] Can create ProfileDimension records in Prisma Studio
 - [ ] Can create FeedbackResponse records in Prisma Studio
 - [ ] Unique constraint prevents duplicate user+dimension
 
 ## Completion
 
-**Date:**
-**Summary:**
+**Date:** 2026-02-02
+**Summary:** Added ProfileDimension and FeedbackResponse models with migration
 **Files changed:**
-**Notes:**
+- web/prisma/schema.prisma
+- web/prisma/migrations/20260203004428_add_matching_dimensions/
+**Notes:** Migration ran successfully. Manual verification of CRUD operations pending.
