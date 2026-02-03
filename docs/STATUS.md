@@ -67,8 +67,8 @@ Constraints:
 
 **Match Pool & Attraction (T007-T008) Complete**
 
-Next phase: Interaction Flow (from backlog)
-1. **interaction-flow.md** — Nudge → Wink → Crush Note → Accept
+1. **T009 - Deployment** — Move to production for user testing (Vercel + Neon + R2)
+2. **T010 - Interaction Flow** — Nudge → Wink → Crush Note → Accept
 
 ---
 
