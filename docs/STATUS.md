@@ -34,6 +34,7 @@ Constraints:
 ## Recently Completed
 
 ### 2026-02-02
+- **T001/T003 Update** — Added experience tracking (User.experienceLevel) and question type support (scenario/reflective/direct_choice)
 - **T004 Compatibility Calculation** — Match scoring with user-defined dealbreakers as hard filters
 - **T003 Score Extraction** — LLM-based extraction of dimension scores from free-text answers
 - **T002 Dimension Constants** — Created lib/matching/dimensions.ts with types, rules, spectrums
