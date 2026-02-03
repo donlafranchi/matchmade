@@ -34,6 +34,7 @@ Constraints:
 ## Recently Completed
 
 ### 2026-02-02
+- **T002 Dimension Constants** — Created lib/matching/dimensions.ts with types, rules, spectrums
 - **T001 Matching Schema** — Added ProfileDimension and FeedbackResponse models with dealbreaker flag
 
 ### 2026-01-24
@@ -64,7 +65,7 @@ Constraints:
 
 ## Next Up
 
-1. [ ] T002 - Dimension Constants
+1. [x] T002 - Dimension Constants
 2. [ ] T003 - Score Extraction
 3. [ ] T004 - Compatibility Calculation
 4. [ ] T005 - Onboarding Questions UI
