@@ -57,6 +57,10 @@ model User {
   // Experience tracking (T001 update)
   experienceLevel      String?  // 'new' | 'learning' | 'experienced'
   experiencePreference String?  // 'similar' | 'any' | 'more_experienced'
+
+  // Interest tracking (T008)
+  interestsSent     Interest[] @relation("InterestFrom")
+  interestsReceived Interest[] @relation("InterestTo")
 }
 
 // Auth.js models
@@ -392,4 +396,19 @@ model FeedbackResponse {
   @@index([fromUserId])
   @@index([toUserId])
   @@index([shouldRemove])  // For finding flagged users
+}
+
+// Interest tracking for match pool (T008)
+model Interest {
+  id         String   @id @default(cuid())
+  fromUserId String
+  toUserId   String
+  createdAt  DateTime @default(now())
+
+  fromUser User @relation("InterestFrom", fields: [fromUserId], references: [id], onDelete: Cascade)
+  toUser   User @relation("InterestTo", fields: [toUserId], references: [id], onDelete: Cascade)
+
+  @@unique([fromUserId, toUserId])  // Can only express interest once
+  @@index([fromUserId])
+  @@index([toUserId])
 }

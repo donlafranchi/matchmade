@@ -14,24 +14,28 @@
 
 ## Current Phase
 
-**Matching System (T001-T006)**
+**Match Pool & Attraction (T007-T008)**
 
 Goals:
-- Dimension-based profile scoring
-- User-defined dealbreakers
-- Compatibility calculation
+- Photo upload for two-stage filter
+- Match pool display showing compatible users
+- Interest/attraction actions
 
 Non-goals:
-- Actual match surfacing UI (later)
-- Notifications (later)
+- Crush Notes / interaction flow (later)
+- Events (later)
 
 Constraints:
-- No fixed profile minimums — sparse profiles = smaller pool
-- Dealbreakers filter out, not penalize
+- Users without photos don't appear in match pool
+- No detailed profiles — info scarcity is intentional
 
 ---
 
 ## Recently Completed
+
+### 2026-02-03
+- **T008 Match Pool Display** — Match pool page showing compatible users with photos, compatibility indicators (not percentages), interest tracking, mutual interest detection. Filter tabs for All/Interested/Mutual.
+- **T007 Photo Upload** — Photo upload system with S3-compatible storage, drag-and-drop UI, onboarding step. Max 6 photos, 5MB each. Users without photos won't appear in match pool.
 
 ### 2026-02-02
 - **T006 Feedback Form** — Optional post-date feedback with safety flag, profile accuracy, match quality
@@ -50,33 +54,21 @@ Constraints:
 
 ### 2026-01-19
 - **Phase 3.4 Complete** - Live profile extraction, chat agent, LLM client, frontend integration
-- Built multi-provider LLM client (Anthropic + Ollama)
-- Created chat agent with adaptive persona
-- Implemented profile extraction (runs every 5 messages)
-- Added profile shell UI showing what we're learning
-- Simplified onboarding flow and messaging
-- Created debug view at `/debug`
-
-### 2026-01-16
-- **Documentation Simplification** - Created docs/ with VISION, FEATURES, VERSIONS
 
 ---
 
 ## In Progress
 
-*None - Matching System phase complete*
+*None*
 
 ---
 
 ## Next Up
 
-1. [x] T002 - Dimension Constants
-2. [x] T003 - Score Extraction
-3. [x] T004 - Compatibility Calculation
-4. [x] T005 - Onboarding Questions UI
-5. [x] T006 - Feedback Form
+**Match Pool & Attraction (T007-T008) Complete**
 
-**Matching System (T001-T006) Complete**
+Next phase: Interaction Flow (from backlog)
+1. **interaction-flow.md** — Nudge → Wink → Crush Note → Accept
 
 ---
 
@@ -93,6 +85,8 @@ Constraints:
 | Login | http://localhost:3000 |
 | Onboarding Intro | http://localhost:3000/onboarding |
 | Onboarding Questions | http://localhost:3000/onboarding/questions |
+| Onboarding Photos | http://localhost:3000/onboarding/photos |
+| Match Pool | http://localhost:3000/pool |
 | Chat | http://localhost:3000/contexts/romantic |
 | Feedback | http://localhost:3000/feedback/[matchId]?to=[userId] |
 | Debug | http://localhost:3000/debug |
@@ -106,13 +100,17 @@ Constraints:
 | LLM Client | `web/lib/llm-client.ts` |
 | Chat Agent | `web/lib/agents/chat-agent.ts` |
 | Extraction Agent | `web/lib/agents/extraction-agent.ts` |
-| Chat API | `web/app/api/chat/route.ts` |
-| Debug View | `web/app/debug/page.tsx` |
-| Decisions | `docs/DECISIONS.md` |
 | Dimensions | `web/lib/matching/dimensions.ts` |
-| Score Extraction | `web/lib/matching/extract-score.ts` |
 | Compatibility | `web/lib/matching/compatibility.ts` |
 | Questions | `web/lib/matching/questions.ts` |
+| Photo Storage | `web/lib/storage.ts` |
+| Photo Utils | `web/lib/photos.ts` |
+| Photo API | `web/app/api/photos/route.ts` |
+| Photo Upload UI | `web/app/components/PhotoUpload.tsx` |
+| Match Pool API | `web/app/api/pool/route.ts` |
+| Interest API | `web/app/api/interest/route.ts` |
+| User Card | `web/app/components/UserCard.tsx` |
+| Pool Page | `web/app/pool/page.tsx` |
 
 ---
-*Last updated: 2026-02-02*
+*Last updated: 2026-02-03*

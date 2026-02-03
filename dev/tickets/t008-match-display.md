@@ -22,16 +22,16 @@ Information scarcity forces genuine discovery in person.
 ## Acceptance Criteria
 
 ### Phase 1: Basic Pool Display
-- [ ] Match pool page showing compatible users
-- [ ] User cards with photo + minimal info
-- [ ] Compatibility indicator (visual, not percentage)
-- [ ] Filter by basic criteria (location, age range)
-- [ ] Empty state for sparse pools
+- [x] Match pool page showing compatible users
+- [x] User cards with photo + minimal info
+- [x] Compatibility indicator (visual, not percentage)
+- [ ] Filter by basic criteria (location, age range) — deferred
+- [x] Empty state for sparse pools
 
-### Phase 2: Interaction Hooks (prep for T008)
-- [ ] "Interested" action on user cards (becomes Nudge in T008)
-- [ ] Show mutual interest indicator
-- [ ] Track who user has expressed interest in
+### Phase 2: Interaction Hooks
+- [x] "Interested" action on user cards
+- [x] Show mutual interest indicator
+- [x] Track who user has expressed interest in
 
 ## How It Works
 
@@ -98,17 +98,27 @@ Information scarcity forces genuine discovery in person.
 *Added during implementation*
 
 ## Verification
-- [ ] Pool shows only users above compatibility threshold
-- [ ] Dealbreakers filter out incompatible users
-- [ ] No percentage scores visible to users
-- [ ] "Interested" action persists correctly
-- [ ] Mutual interest is detected
-- [ ] Empty states display appropriately
-- [ ] Photos required before user appears in pool
+- [x] Pool shows only users above compatibility threshold
+- [x] Dealbreakers filter out incompatible users
+- [x] No percentage scores visible to users
+- [x] "Interested" action persists correctly
+- [x] Mutual interest is detected
+- [x] Empty states display appropriately
+- [x] Photos required before user appears in pool
 
 ## Completion
 
-**Date:**
-**Summary:**
+**Date:** 2026-02-03
+**Summary:** Implemented match pool display with user cards, compatibility indicators, interest tracking, and mutual interest detection
 **Files changed:**
+- `prisma/schema.prisma` - Added Interest model
+- `prisma/migrations/20260203144715_add_interest_model/` - Migration
+- `app/api/pool/route.ts` - Match pool API endpoint
+- `app/api/interest/route.ts` - Interest tracking API
+- `app/components/UserCard.tsx` - User card with photo, compatibility, interest button
+- `app/pool/page.tsx` - Match pool page with filtering and empty states
 **Notes:**
+- Compatibility threshold set at 40 (adjustable)
+- Filter tabs: All, Interested, Mutual
+- Visual compatibility hints instead of percentages
+- Users without photos excluded from pool
