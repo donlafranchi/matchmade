@@ -1,18 +1,21 @@
 # T004 - Compatibility Calculation
 
 ## Goal
-Calculate compatibility scores between two users based on their dimension scores.
+Calculate compatibility scores between two users based on their dimension scores, with user-defined dealbreakers as hard filters.
 
 ## Acceptance Criteria
 - [ ] Function to calculate per-dimension compatibility
-- [ ] Different rules: similarity, compatibility, complementary, dealbreaker
+- [ ] Different rules: similarity, compatibility, complementary
 - [ ] Overall match score combining lifestyle and values
 - [ ] Confidence level based on data completeness
-- [ ] Dealbreaker detection that blocks matches
+- [ ] User-defined dealbreaker detection (from `dealbreaker` flag on ProfileDimension)
+- [ ] Dealbreakers filter out matches entirely (not just score 0)
 
 ## Constraints
-- Return 0 if dealbreakers conflict
-- Handle missing dimensions gracefully (neutral score)
+- Dealbreakers are user-defined, not hardcoded per dimension
+- If user A marks dimension X as dealbreaker, check if B's position is compatible
+- Missing dimensions: if A requires X and B hasn't answered → no match
+- Handle answered dimensions gracefully (neutral score for non-dealbreakers)
 - Keep math simple and explainable
 
 ## Plan
@@ -34,14 +37,64 @@ interface DimensionScore {
   formation: number
   position: number
   importance: number
+  dealbreaker: boolean
 }
 
-interface MatchScore {
+interface MatchResult {
+  compatible: false
+  reason: string[]
+} | {
+  compatible: true
   lifestyle: number
   values: number
   overall: number
   confidence: 'low' | 'medium' | 'high'
-  dealbreakers: string[]
+}
+
+// Check if two users can be matched (dealbreaker check)
+export function checkDealbreakers(
+  a: Map<string, DimensionScore>,
+  b: Map<string, DimensionScore>
+): string[] {
+  const blocked: string[] = []
+
+  // Check A's dealbreakers against B
+  for (const [dim, scoreA] of a.entries()) {
+    if (!scoreA.dealbreaker) continue
+
+    const scoreB = b.get(dim)
+
+    // B hasn't answered a dimension A requires
+    if (!scoreB || scoreB.formation === 0) {
+      blocked.push(`${dim}:missing`)
+      continue
+    }
+
+    // Check if positions are incompatible (opposite ends of spectrum)
+    const distance = Math.abs(scoreA.position - scoreB.position)
+    if (distance > 2) {
+      blocked.push(`${dim}:incompatible`)
+    }
+  }
+
+  // Check B's dealbreakers against A
+  for (const [dim, scoreB] of b.entries()) {
+    if (!scoreB.dealbreaker) continue
+
+    const scoreA = a.get(dim)
+
+    if (!scoreA || scoreA.formation === 0) {
+      blocked.push(`${dim}:missing`)
+      continue
+    }
+
+    const distance = Math.abs(scoreA.position - scoreB.position)
+    if (distance > 2) {
+      blocked.push(`${dim}:incompatible`)
+    }
+  }
+
+  return [...new Set(blocked)] // dedupe
 }
 
 export function dimensionCompatibility(
@@ -67,25 +120,22 @@ export function dimensionCompatibility(
     case 'complementary':
       baseScore = 70 // Most combinations work
       break
-    case 'dealbreaker':
-      baseScore = a.position === b.position ? 100 : 0
-      break
   }
 
   const importanceWeight = Math.max(a.importance, b.importance) / 3
   return Math.round(baseScore * (0.5 + (confidence * 0.3) + (importanceWeight * 0.2)))
 }
 
-export async function calculateMatch(userAId: string, userBId: string): Promise<MatchScore> {
+export async function calculateMatch(userAId: string, userBId: string): Promise<MatchResult> {
   const [dimensionsA, dimensionsB] = await Promise.all([
     getDimensionMap(userAId),
     getDimensionMap(userBId)
   ])
 
-  // Check dealbreakers first
-  const dealbreakers = checkDealbreakers(dimensionsA, dimensionsB)
-  if (dealbreakers.length > 0) {
-    return { lifestyle: 0, values: 0, overall: 0, confidence: 'high', dealbreakers }
+  // Check dealbreakers first - these are hard filters
+  const blocked = checkDealbreakers(dimensionsA, dimensionsB)
+  if (blocked.length > 0) {
+    return { compatible: false, reason: blocked }
   }
 
   // Calculate lifestyle score
@@ -111,7 +161,7 @@ export async function calculateMatch(userAId: string, userBId: string): Promise<
   const overall = Math.round((lifestyle * 0.5) + (values * 0.5))
   const confidence = calculateConfidence(dimensionsA, dimensionsB)
 
-  return { lifestyle, values, overall, confidence, dealbreakers: [] }
+  return { compatible: true, lifestyle, values, overall, confidence }
 }
 
 async function getDimensionMap(userId: string): Promise<Map<string, DimensionScore>> {
@@ -119,32 +169,9 @@ async function getDimensionMap(userId: string): Promise<Map<string, DimensionSco
   return new Map(dimensions.map(d => [d.dimension, {
     formation: d.formation,
     position: d.position,
-    importance: d.importance
+    importance: d.importance,
+    dealbreaker: d.dealbreaker
   }]))
-}
-
-function checkDealbreakers(a: Map<string, DimensionScore>, b: Map<string, DimensionScore>): string[] {
-  const dealbreakers: string[] = []
-
-  // Intent must align
-  const intentA = a.get('intent')
-  const intentB = b.get('intent')
-  if (intentA && intentB && intentA.position !== intentB.position) {
-    dealbreakers.push('intent')
-  }
-
-  // Children must be compatible
-  const childrenA = a.get('children')
-  const childrenB = b.get('children')
-  if (childrenA && childrenB) {
-    // want + no = dealbreaker
-    if ((childrenA.position === 2 && childrenB.position === -2) ||
-        (childrenA.position === -2 && childrenB.position === 2)) {
-      dealbreakers.push('children')
-    }
-  }
-
-  return dealbreakers
 }
 
 function calculateConfidence(a: Map<string, DimensionScore>, b: Map<string, DimensionScore>): 'low' | 'medium' | 'high' {
@@ -170,9 +197,11 @@ function average(nums: number[]): number {
 
 ## Verification
 - [ ] Two users with similar scores get high compatibility
-- [ ] Dealbreakers return 0 overall score
-- [ ] Missing data returns neutral (50) per dimension
+- [ ] User-defined dealbreakers filter out incompatible matches (`compatible: false`)
+- [ ] If A requires dimension X and B hasn't answered → no match
+- [ ] Missing non-dealbreaker dimensions return neutral (50)
 - [ ] Confidence reflects data completeness
+- [ ] Sparse profiles work (just smaller candidate pool)
 
 ## Completion
 
