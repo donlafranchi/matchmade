@@ -31,6 +31,7 @@ model ProfileDimension {
   formation  Int      @default(0)  // 0-4 (none to highly formed)
   position   Float    @default(0)  // -2 to +2 (spectrum position)
   importance Int      @default(0)  // 0-3 (how much it matters)
+  dealbreaker Boolean @default(false)  // Hard pass - filter out incompatible
 
   rawAnswer  String?  // Original text response
   updatedAt  DateTime @updatedAt
@@ -67,7 +68,8 @@ model FeedbackResponse {
 - Added User relations: `profileDimensions`, `feedbackGiven` (named relation), `feedbackReceived` (named relation)
 - ProfileDimension uses `onDelete: Cascade` to clean up when user is deleted
 - FeedbackResponse uses `onDelete: RESTRICT` to prevent accidental data loss
-- Migration: 20260203004428_add_matching_dimensions
+- Migration 1: 20260203004428_add_matching_dimensions
+- Migration 2: 20260203011119_add_dealbreaker_flag - added `dealbreaker` boolean for hard requirements
 
 ## Verification
 - [x] `npx prisma migrate dev` runs without errors

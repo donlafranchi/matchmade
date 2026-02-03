@@ -333,6 +333,7 @@ model ProfileDimension {
   formation  Int      @default(0)  // 0-4 (none to highly formed)
   position   Float    @default(0)  // -2 to +2 (spectrum position)
   importance Int      @default(0)  // 0-3 (how much it matters)
+  dealbreaker Boolean @default(false)  // Hard pass - filter out incompatible
 
   rawAnswer  String?  // Original text response
   updatedAt  DateTime @updatedAt
