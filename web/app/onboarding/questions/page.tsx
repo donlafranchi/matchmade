@@ -82,13 +82,13 @@ export default function OnboardingQuestionsPage() {
       if (currentIndex < questions.length - 1) {
         setCurrentIndex(currentIndex + 1)
       } else {
-        // Done - create context and redirect to chat
+        // Done - create context and redirect to photos
         await fetch("/api/onboarding", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ contexts: ["romantic"] }),
         })
-        router.push("/contexts/romantic")
+        router.push("/onboarding/photos")
       }
     } catch (error) {
       console.error("Error saving answer:", error)
@@ -118,13 +118,13 @@ export default function OnboardingQuestionsPage() {
       if (currentIndex < questions.length - 1) {
         setCurrentIndex(currentIndex + 1)
       } else {
-        // Done
+        // Done - redirect to photos
         await fetch("/api/onboarding", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ contexts: ["romantic"] }),
         })
-        router.push("/contexts/romantic")
+        router.push("/onboarding/photos")
       }
     } finally {
       setIsSubmitting(false)
