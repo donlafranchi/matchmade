@@ -2,12 +2,14 @@
 
 Read this first every session.
 
-## Quick Start
+## Workflow
 
 1. Read `docs/STATUS.md` for current state
-2. Check `dev/tickets/` for active work
-3. One ticket at a time
-4. Update STATUS.md after completing work
+2. Pick ONE ticket from `dev/tickets/`
+3. Implement
+4. Run `npm test` and `npm run build` — **commit only if passing**
+5. Update ticket's Completion section
+6. Update `docs/STATUS.md`
 
 ## Structure
 
@@ -83,7 +85,9 @@ cd web && npx tsx scripts/reset-db.ts
 
 ## Session Handoff
 
-End every session by updating docs/STATUS.md:
-- Move completed items to Recently Completed
-- Note blockers or open questions
-- Update Next Up if priorities changed
+Before ending a session:
+1. Ensure all ticket Completion sections are filled
+2. Update `docs/STATUS.md`:
+   - Add completed work to Recently Completed (date, ticket, summary)
+   - Update In Progress / Next Up
+   - Note any blockers

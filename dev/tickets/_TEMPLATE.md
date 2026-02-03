@@ -19,9 +19,13 @@
 ## Implementation Notes
 *Added during implementation*
 
+## Tests
+- [ ] Unit tests added/updated
+- [ ] Integration tests (if applicable)
+
 ## Verification
-- [ ] Code runs without errors
-- [ ] Tests pass (if applicable)
+- [ ] `npm test` passes
+- [ ] `npm run build` passes
 - [ ] Manual testing complete
 
 ## Completion
@@ -29,4 +33,5 @@
 **Date:** YYYY-MM-DD
 **Summary:** [What was built]
 **Files changed:** [list]
+**Tests:** [tests added/updated]
 **Notes:** [Any follow-ups]

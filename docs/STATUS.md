@@ -14,11 +14,27 @@
 
 ## Current Phase
 
-Phase 3 - Self-Hosted Agents
+**Matching System (T001-T006)**
+
+Goals:
+- Dimension-based profile scoring
+- User-defined dealbreakers
+- Compatibility calculation
+
+Non-goals:
+- Actual match surfacing UI (later)
+- Notifications (later)
+
+Constraints:
+- No fixed profile minimums — sparse profiles = smaller pool
+- Dealbreakers filter out, not penalize
 
 ---
 
 ## Recently Completed
+
+### 2026-02-02
+- **T001 Matching Schema** — Added ProfileDimension and FeedbackResponse models with dealbreaker flag
 
 ### 2026-01-24
 - **Project Scaffolding** - Created CLAUDE.md, docs/PRODUCT.md, docs/ROADMAP.md, docs/STATUS.md, docs/DECISIONS.md, design/ folder, ticket template
@@ -42,16 +58,17 @@ Phase 3 - Self-Hosted Agents
 
 ## In Progress
 
-*None*
+- **T002-T006** — Remaining matching system tickets
 
 ---
 
 ## Next Up
 
-1. [ ] Phase 3.5: Local Testing (verify full flow)
-2. [ ] Phase 3.6: VPS Setup with vLLM
-3. [ ] Phase 3.7: Vercel Deployment
-4. [ ] Phase 3.8: Beta User Testing
+1. [ ] T002 - Dimension Constants
+2. [ ] T003 - Score Extraction
+3. [ ] T004 - Compatibility Calculation
+4. [ ] T005 - Onboarding Questions UI
+5. [ ] T006 - Feedback Form
 
 ---
 
@@ -84,4 +101,4 @@ Phase 3 - Self-Hosted Agents
 | Decisions | `docs/DECISIONS.md` |
 
 ---
-*Last updated: 2026-01-24*
+*Last updated: 2026-02-02*
