@@ -63,6 +63,10 @@ export function SignInButtons() {
             <input
               required
               type="email"
+              id="email"
+              name="email"
+              autoComplete="email"
+              inputMode="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               className="w-full rounded-lg border border-zinc-200 bg-white px-3 py-2 text-zinc-900 shadow-sm outline-none ring-0 transition focus:border-zinc-400"

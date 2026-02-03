@@ -581,18 +581,55 @@ const [showEvidence, setShowEvidence] = useState(false);
 
 ## Phase 3: Profile Extraction from Chat (Jan 19, 2026)
 
-**Decision:** Run extraction every 5 messages with 80% confidence threshold
+**Decision:** Run extraction every message while basics incomplete, then stop (nightly batch takes over)
 
 **Why:**
-- 5 messages: Enough context for meaningful extraction without constant LLM calls
-- 80% threshold: Only save data we're confident about, avoid bad inferences
-- Non-blocking: Extraction runs after response, doesn't slow chat
+- Original approach (every 5 messages) caused data loss - user info wasn't captured
+- During onboarding, user shares critical info (name, age, location) that must be saved immediately
+- Once profile + intent reach 100% complete, extraction stops to save LLM costs
+- Nightly batch handles ongoing updates for established users
 
 **What's extracted:**
 - Shared profile: location, age, name, coreValues, constraints
 - Context intent: relationship preferences specific to context type
+- 80% confidence threshold: Only save data we're confident about
 
 **Reference:** `web/lib/agents/extraction-agent.ts`, `web/app/api/chat/route.ts`
+
+---
+
+## Phase 3: Skip Self-Hosted LLM for Now (Jan 19, 2026)
+
+**Decision:** Continue using Anthropic API (Claude Sonnet 4) instead of self-hosted Ollama/vLLM
+
+**Why:**
+- Tested models performed poorly for our use case:
+  - **Claude 3.5 Sonnet:** Responses felt cringey and didn't follow instructions well
+  - **Vicuna:** Terribly slow and quality too low for meaningful conversations
+- Chat agent requires high capability for:
+  - Natural therapeutic conversation style (not cringey or robotic)
+  - Following complex system prompts reliably
+  - Accurate profile extraction from nuanced language
+- Cost acceptable during early development (~$0.01-0.02 per conversation turn)
+
+**Alternatives Considered:**
+- Ollama with Vicuna (rejected: too slow, poor quality)
+- Claude 3.5 Sonnet (rejected: cringey responses, didn't follow instructions)
+- vLLM with Llama 3.1 70B (deferred: worth revisiting when models improve)
+
+**Trade-offs:**
+- ✅ High quality conversations and extraction
+- ✅ Follows instructions reliably
+- ✅ No infrastructure to manage
+- ⚠️ API costs (~$0.01-0.02/turn, acceptable for beta)
+- ⚠️ Vendor dependency on Anthropic
+
+**Revisit When:**
+- Open models show Claude Opus-level instruction following
+- User volume makes API costs significant (>$100/month)
+- Need offline/air-gapped deployment
+
+**Reference:** `dev/tickets/phase-3/README.md` (3.5, 3.6 skipped)
 
 ---
 
