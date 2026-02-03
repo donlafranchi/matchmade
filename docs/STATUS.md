@@ -34,6 +34,7 @@ Constraints:
 ## Recently Completed
 
 ### 2026-02-02
+- **T005 Onboarding Questions UI** — Two-track onboarding with experience-based question routing
 - **T001/T003 Update** — Added experience tracking (User.experienceLevel) and question type support (scenario/reflective/direct_choice)
 - **T004 Compatibility Calculation** — Match scoring with user-defined dealbreakers as hard filters
 - **T003 Score Extraction** — LLM-based extraction of dimension scores from free-text answers
@@ -62,7 +63,7 @@ Constraints:
 
 ## In Progress
 
-- **T002-T006** — Remaining matching system tickets
+- **T006** — Feedback Form (last matching system ticket)
 
 ---
 
@@ -71,7 +72,7 @@ Constraints:
 1. [x] T002 - Dimension Constants
 2. [x] T003 - Score Extraction
 3. [x] T004 - Compatibility Calculation
-4. [ ] T005 - Onboarding Questions UI
+4. [x] T005 - Onboarding Questions UI
 5. [ ] T006 - Feedback Form
 
 ---
@@ -87,7 +88,8 @@ Constraints:
 | Page | URL |
 |------|-----|
 | Login | http://localhost:3000 |
-| Onboarding | http://localhost:3000/onboarding |
+| Onboarding Intro | http://localhost:3000/onboarding |
+| Onboarding Questions | http://localhost:3000/onboarding/questions |
 | Chat | http://localhost:3000/contexts/romantic |
 | Debug | http://localhost:3000/debug |
 
@@ -103,6 +105,10 @@ Constraints:
 | Chat API | `web/app/api/chat/route.ts` |
 | Debug View | `web/app/debug/page.tsx` |
 | Decisions | `docs/DECISIONS.md` |
+| Dimensions | `web/lib/matching/dimensions.ts` |
+| Score Extraction | `web/lib/matching/extract-score.ts` |
+| Compatibility | `web/lib/matching/compatibility.ts` |
+| Questions | `web/lib/matching/questions.ts` |
 
 ---
 *Last updated: 2026-02-02*

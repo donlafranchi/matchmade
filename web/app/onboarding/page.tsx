@@ -79,35 +79,20 @@ export default function OnboardingPage() {
     setShowContinue(false);
     setIsProcessing(true);
 
-    // Create default romantic context
-    try {
-      const response = await fetch("/api/onboarding", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contexts: ["romantic"] }),
-      });
+    setTimeout(() => {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: Date.now(),
+          text: "Let's start with a few quick questions.",
+          isAgent: true,
+        },
+      ]);
 
-      if (response.ok) {
-        setTimeout(() => {
-          setMessages((prev) => [
-            ...prev,
-            {
-              id: Date.now(),
-              text: "Let's go.",
-              isAgent: true,
-            },
-          ]);
-
-          setTimeout(() => {
-            router.push("/contexts/romantic");
-          }, 1000);
-        }, 500);
-      }
-    } catch (error) {
-      console.error("Error creating context:", error);
-      setIsProcessing(false);
-      setShowContinue(true);
-    }
+      setTimeout(() => {
+        router.push("/onboarding/questions");
+      }, 1000);
+    }, 500);
   };
 
   return (
