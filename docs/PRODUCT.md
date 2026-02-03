@@ -73,6 +73,36 @@ Photos exist but are evaluated independently. Two-stage filter:
 
 Both required before someone appears in your pool.
 
+### Experience-Based Profiling
+
+Not everyone has relationship experience. A 19-year-old who's never been in a serious relationship can't meaningfully answer "What does trust look like to you?" — they're guessing or parroting.
+
+**Two question tracks:**
+
+| Track | Who | Approach |
+|-------|-----|----------|
+| **Track A** | New/learning daters | Concrete scenarios, simple choices, normalize uncertainty |
+| **Track B** | Experienced daters | Reflective questions, nuance welcome, can articulate needs |
+
+**Experience levels:**
+- "Pretty new to this"
+- "Some, but still figuring things out"
+- "I know what I'm looking for"
+
+**Why this matters:**
+- New users can say "I'm new to this" without shame
+- Questions meet people where they are
+- Can match with patient partners or fellow beginners
+- The app helps people learn about themselves, not just report what they already know
+
+**Helping young users develop:**
+- Model healthy communication (the app's voice demonstrates respect)
+- Suggest low-pressure date formats (activity-based, time-bounded, public)
+- Post-date coaching via feedback system
+- Counter toxic narratives — dating is mutual discovery, not winning/losing
+
+See `design/experiential-profiling.md` for full framework.
+
 ---
 
 ## The Match Pool
