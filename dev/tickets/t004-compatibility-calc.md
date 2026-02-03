@@ -4,12 +4,12 @@
 Calculate compatibility scores between two users based on their dimension scores, with user-defined dealbreakers as hard filters.
 
 ## Acceptance Criteria
-- [ ] Function to calculate per-dimension compatibility
-- [ ] Different rules: similarity, compatibility, complementary
-- [ ] Overall match score combining lifestyle and values
-- [ ] Confidence level based on data completeness
-- [ ] User-defined dealbreaker detection (from `dealbreaker` flag on ProfileDimension)
-- [ ] Dealbreakers filter out matches entirely (not just score 0)
+- [x] Function to calculate per-dimension compatibility
+- [x] Different rules: similarity, compatibility, complementary
+- [x] Overall match score combining lifestyle and values
+- [x] Confidence level based on data completeness
+- [x] User-defined dealbreaker detection (from `dealbreaker` flag on ProfileDimension)
+- [x] Dealbreakers filter out matches entirely (not just score 0)
 
 ## Constraints
 - Dealbreakers are user-defined, not hardcoded per dimension
@@ -193,19 +193,25 @@ function average(nums: number[]): number {
 ---
 
 ## Implementation Notes
-*Added during implementation*
+- Uses `LIFESTYLE_DIMENSIONS` and `VALUES_DIMENSIONS` from dimensions.ts instead of hardcoded lists
+- Added `calculateMatchFromMaps()` for testing/batch processing without DB lookup
+- `MatchResult` is a discriminated union: `{ compatible: false, reason }` or `{ compatible: true, scores }`
+- Empty dimension arrays handled gracefully (returns neutral 50)
+- Dealbreaker distance threshold is >2 (opposite ends of -2 to +2 spectrum)
 
 ## Verification
-- [ ] Two users with similar scores get high compatibility
-- [ ] User-defined dealbreakers filter out incompatible matches (`compatible: false`)
-- [ ] If A requires dimension X and B hasn't answered → no match
-- [ ] Missing non-dealbreaker dimensions return neutral (50)
-- [ ] Confidence reflects data completeness
-- [ ] Sparse profiles work (just smaller candidate pool)
+- [x] Two users with similar scores get high compatibility
+- [x] User-defined dealbreakers filter out incompatible matches (`compatible: false`)
+- [x] If A requires dimension X and B hasn't answered → no match
+- [x] Missing non-dealbreaker dimensions return neutral (50)
+- [x] Confidence reflects data completeness
+- [x] Sparse profiles work (just smaller candidate pool)
 
 ## Completion
 
-**Date:**
-**Summary:**
+**Date:** 2026-02-02
+**Summary:** Created compatibility calculation with user-defined dealbreakers as hard filters
 **Files changed:**
-**Notes:**
+- web/lib/matching/compatibility.ts (new)
+**Tests:** N/A (no test script configured)
+**Notes:** API endpoint not created yet - can be added when needed for UI
