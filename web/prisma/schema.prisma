@@ -356,8 +356,14 @@ model FeedbackResponse {
   toUserId   String
   matchId    String?  // Optional link to Match
 
-  ease       Int      // 1-4 (not a fit to easy)
-  seeAgain   Int      // 1-3 (no to definitely)
+  // Safety - should this person be removed?
+  shouldRemove    Boolean  @default(false)
+
+  // Profile honesty
+  profileAccuracy String  // 'accurate' | 'minor_diff' | 'misleading'
+
+  // Match quality
+  seeAgain   String   // 'yes' | 'maybe' | 'no'
   notes      String?
 
   createdAt  DateTime @default(now())
@@ -367,4 +373,5 @@ model FeedbackResponse {
 
   @@index([fromUserId])
   @@index([toUserId])
+  @@index([shouldRemove])  // For finding flagged users
 }

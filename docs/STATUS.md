@@ -34,6 +34,7 @@ Constraints:
 ## Recently Completed
 
 ### 2026-02-02
+- **T006 Feedback Form** — Optional post-date feedback with safety flag, profile accuracy, match quality
 - **T005 Onboarding Questions UI** — Two-track onboarding with experience-based question routing
 - **T001/T003 Update** — Added experience tracking (User.experienceLevel) and question type support (scenario/reflective/direct_choice)
 - **T004 Compatibility Calculation** — Match scoring with user-defined dealbreakers as hard filters
@@ -63,7 +64,7 @@ Constraints:
 
 ## In Progress
 
-- **T006** — Feedback Form (last matching system ticket)
+*None - Matching System phase complete*
 
 ---
 
@@ -73,7 +74,9 @@ Constraints:
 2. [x] T003 - Score Extraction
 3. [x] T004 - Compatibility Calculation
 4. [x] T005 - Onboarding Questions UI
-5. [ ] T006 - Feedback Form
+5. [x] T006 - Feedback Form
+
+**Matching System (T001-T006) Complete**
 
 ---
 
@@ -91,6 +94,7 @@ Constraints:
 | Onboarding Intro | http://localhost:3000/onboarding |
 | Onboarding Questions | http://localhost:3000/onboarding/questions |
 | Chat | http://localhost:3000/contexts/romantic |
+| Feedback | http://localhost:3000/feedback/[matchId]?to=[userId] |
 | Debug | http://localhost:3000/debug |
 
 ---
