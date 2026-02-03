@@ -34,6 +34,7 @@ Constraints:
 ## Recently Completed
 
 ### 2026-02-02
+- **T004 Compatibility Calculation** — Match scoring with user-defined dealbreakers as hard filters
 - **T003 Score Extraction** — LLM-based extraction of dimension scores from free-text answers
 - **T002 Dimension Constants** — Created lib/matching/dimensions.ts with types, rules, spectrums
 - **T001 Matching Schema** — Added ProfileDimension and FeedbackResponse models with dealbreaker flag
@@ -68,7 +69,7 @@ Constraints:
 
 1. [x] T002 - Dimension Constants
 2. [x] T003 - Score Extraction
-3. [ ] T004 - Compatibility Calculation
+3. [x] T004 - Compatibility Calculation
 4. [ ] T005 - Onboarding Questions UI
 5. [ ] T006 - Feedback Form
 
