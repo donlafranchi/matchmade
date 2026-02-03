@@ -8,19 +8,20 @@ Read this first every session.
 2. Pick ONE ticket from `dev/tickets/`
 3. Implement
 4. Run `npm test` and `npm run build` — **commit only if passing**
-5. Update ticket's Completion section
-6. Update `docs/STATUS.md`
+5. If UI changes: Create review ticket in `dev/review/` with manual test steps
+6. Update ticket's Completion section
+7. Update `docs/STATUS.md`
 
 ## Structure
 
 | Folder | Purpose |
 |--------|---------|
-| docs/ | PRODUCT, ROADMAP, DECISIONS, STATUS, VISION, FEATURES |
+| docs/ | PRODUCT, ROADMAP, DECISIONS, STATUS |
 | design/ | Specs in progress (don't implement) |
 | dev/backlog/ | Ready for implementation |
 | dev/tickets/ | Active work |
+| dev/review/ | Manual testing checklists for UI features |
 | dev/archive/ | Completed and shelved work |
-| dev/logs/ | Implementation logs |
 | .claude/agents/ | Sub-agent definitions |
 
 ## Workflow Stages
