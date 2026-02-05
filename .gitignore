@@ -33,3 +33,11 @@ web/prisma/migrations/*_initial/
 
 # Turbo
 .turbo/
+
+# Development/Project Management (kept in separate private repo)
+CLAUDE.md
+.claude/
+docs/
+dev/
+design/
+playbooks/
